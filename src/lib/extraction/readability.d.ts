@@ -1,14 +1,14 @@
 declare module '@mozilla/readability' {
   interface ReadabilityArticle {
-    title: string;
-    byline: string | null;
-    content: string;
-    textContent: string;
-    excerpt: string;
-    publishedTime: string | null;
-    siteName: string | null;
+    title: string | undefined;
+    byline: string | null | undefined;
+    content: string | undefined;
+    textContent: string | undefined;
+    excerpt: string | undefined;
+    publishedTime: string | null | undefined;
+    siteName: string | null | undefined;
     length: number;
-    lang: string | null;
+    lang: string | null | undefined;
   }
 
   interface ReadabilityOptions {

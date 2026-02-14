@@ -26,12 +26,12 @@ export function extractArticle(doc: Document): ReadabilityResult | null {
   }
 
   return {
-    title: article.title,
-    byline: article.byline,
-    content: article.content,
-    textContent: article.textContent,
-    excerpt: article.excerpt,
-    publishedTime: article.publishedTime,
-    siteName: article.siteName,
+    title: article.title ?? '',
+    byline: article.byline ?? null,
+    content: article.content ?? '',
+    textContent: article.textContent ?? '',
+    excerpt: article.excerpt ?? '',
+    publishedTime: article.publishedTime ?? null,
+    siteName: article.siteName ?? null,
   };
 }

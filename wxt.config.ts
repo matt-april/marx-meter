@@ -7,8 +7,9 @@ export default defineConfig({
   manifest: {
     name: 'Marx Meter',
     description: "Decode the news. Who benefits? Now you'll know.",
-    version: '0.0.1',
+    version: '0.1.0',
     action: {},
+    permissions: ['storage', 'activeTab'],
     icons: {
       '16': '/icon/16.png',
       '32': '/icon/32.png',

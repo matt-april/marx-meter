@@ -13,18 +13,18 @@
 
 ## M0: Project Scaffolding
 
-**Status:** Not started
+**Status:** Complete
 **Goal:** Extension loads in Chrome, opens side panel, CI passes.
 
 | Task | Status | Owner | Notes |
 |------|--------|-------|-------|
-| Init WXT project with Preact + Tailwind | [ ] | | |
-| Side panel renders with styled heading | [ ] | | |
-| Background service worker + content script stubs | [ ] | | |
-| Vite build produces loadable zip | [ ] | | |
-| GitHub Actions CI (lint, types, test, build) | [ ] | | |
-| Vitest configured with smoke test | [ ] | | |
-| Project structure matches spec | [ ] | | |
+| Init WXT project with Preact + Tailwind | [x] | Agent | WXT 0.20.17, Preact 10.28.3, Tailwind v4 |
+| Side panel renders with styled heading | [x] | Agent | Dark bg, Tailwind utility classes |
+| Background service worker + content script stubs | [x] | Agent | Opens side panel on toolbar click |
+| Vite build produces loadable zip | [x] | Agent | `.output/chrome-mv3/manifest.json` verified |
+| GitHub Actions CI (lint, types, test, build) | [x] | Agent | `.github/workflows/ci.yml` |
+| Vitest configured with smoke test | [x] | Agent | 2 tests passing |
+| Project structure matches spec | [x] | Agent | All dirs + .gitkeep files created |
 
 ---
 

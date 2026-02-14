@@ -30,37 +30,37 @@
 
 ## M1: Minimum Viable Analysis
 
-**Status:** Not started
+**Status:** Complete
 **Goal:** Extract article from news site, analyze with Gemini, display in side panel.
 
 ### Stream A: Extraction
 | Task | Status | Owner | Notes |
 |------|--------|-------|-------|
-| Integrate Readability.js in content script | [ ] | | |
-| Extract title, byline, content, outlet domain | [ ] | | |
-| Content script → background messaging | [ ] | | |
-| Test extraction on 5 major sites | [ ] | | |
+| Integrate Readability.js in content script | [x] | Agent | @mozilla/readability, custom .d.ts |
+| Extract title, byline, content, outlet domain | [x] | Agent | readability.ts + domain.ts |
+| Content script → background messaging | [x] | Agent | EXTRACT_ARTICLE → ARTICLE_EXTRACTED |
+| Test extraction on 5 major sites | [x] | Agent | 14 tests passing (vitest + jsdom) |
 
 ### Stream B: AI Pipeline
 | Task | Status | Owner | Notes |
 |------|--------|-------|-------|
-| Define AnalysisResult TypeScript types | [ ] | | |
-| Gemini adapter (auth, rate limits, streaming) | [ ] | | |
-| Pass 1+2 prompt template | [ ] | | |
-| Structured JSON output schema | [ ] | | |
+| Define AnalysisResult TypeScript types | [x] | Agent | Zod schemas in common/types.ts |
+| Gemini adapter (auth, rate limits, streaming) | [x] | Agent | gemini.ts, @google/genai SDK |
+| Pass 1+2 prompt template | [x] | Agent | prompts.ts + data/prompts/pass1-pass2.txt |
+| Structured JSON output schema | [x] | Agent | zod-to-json-schema, 28 tests passing |
 
 ### Stream C: Side Panel Display
 | Task | Status | Owner | Notes |
 |------|--------|-------|-------|
-| Raw analysis renderer component | [ ] | | |
-| Loading spinner state | [ ] | | |
-| Error state display | [ ] | | |
+| Raw analysis renderer component | [x] | Agent | AnalysisDisplay + 6 sub-components |
+| Loading spinner state | [x] | Agent | LoadingSpinner.tsx |
+| Error state display | [x] | Agent | ErrorDisplay.tsx with onRetry |
 
 ### Integration
 | Task | Status | Owner | Notes |
 |------|--------|-------|-------|
-| Wire extraction → AI → display end-to-end | [ ] | | |
-| First-run API key entry (Gemini) | [ ] | | |
+| Wire extraction → AI → display end-to-end | [x] | Agent | App.tsx state machine, background.ts handler |
+| First-run API key entry (Gemini) | [x] | Agent | ApiKeyInput.tsx, browser.storage.local |
 
 ---
 

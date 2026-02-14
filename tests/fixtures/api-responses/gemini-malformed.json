@@ -1,0 +1,5 @@
+{
+  "quickTake": "Some analysis here",
+  "whoBenefits": [],
+  "framingChoices": "this should be an array not a string"
+}

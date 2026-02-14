@@ -1,0 +1,50 @@
+{
+  "quickTake": "This article frames mass layoffs at TechCorp as a positive 'restructuring' that will benefit shareholders, while centering investor reaction and analyst commentary. No workers or union representatives are quoted despite 5,000 job losses.",
+  "whoBenefits": ["TechCorp shareholders", "C-suite executives", "Wall Street analysts"],
+  "whosAbsent": ["Laid-off workers", "Labor unions", "Affected communities", "Remaining employees facing increased workloads"],
+  "framingChoices": [
+    {
+      "type": "euphemism",
+      "quote": "workforce optimization initiative",
+      "explanation": "The phrase 'workforce optimization' sanitizes the reality of 5,000 people losing their jobs. It frames human suffering as a technical process improvement."
+    },
+    {
+      "type": "source_bias",
+      "quote": "According to Goldman Sachs analyst Jane Smith, the restructuring positions TechCorp for long-term growth",
+      "explanation": "The only named source is a Wall Street analyst who benefits from stock price increases. No workers, union reps, or community members are quoted."
+    },
+    {
+      "type": "passive_voice",
+      "quote": "positions were eliminated as part of the strategic review",
+      "explanation": "Passive construction obscures who made the decision to fire 5,000 people. Positions weren't 'eliminated' — executives chose to lay off workers."
+    }
+  ],
+  "ideologicalAxes": [
+    {
+      "name": "pro_capital_vs_pro_labor",
+      "score": 2,
+      "label": "Strongly pro-capital",
+      "explanation": "The article centers shareholder value and stock price reaction, treating layoffs as a positive business strategy."
+    },
+    {
+      "name": "individualist_vs_systemic",
+      "score": 3,
+      "label": "Mostly individualist",
+      "explanation": "Frames the layoffs as a company-specific strategic decision rather than part of broader tech industry labor trends."
+    },
+    {
+      "name": "nationalist_vs_internationalist",
+      "score": 5,
+      "label": "Neutral",
+      "explanation": "No significant nationalist or internationalist framing detected."
+    }
+  ],
+  "sourceAnalysis": {
+    "totalSources": 4,
+    "corporateOrOfficial": 3,
+    "workerOrCommunity": 0,
+    "anonymous": 1,
+    "summary": "Three of four sources are corporate executives or Wall Street analysts. Zero workers are quoted despite being the primary people affected."
+  },
+  "missingContext": "The article omits TechCorp's $3B stock buyback program announced last quarter, executive compensation increases of 40% over the same period, and the fact that revenue actually increased 12% year-over-year. It also omits industry-wide trends of using 'AI restructuring' as justification for breaking union organizing efforts."
+}

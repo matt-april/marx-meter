@@ -39,6 +39,10 @@
     "wxt": "^0.20.17"
   },
   "dependencies": {
-    "preact": "^10.28.3"
+    "@google/genai": "^1.41.0",
+    "@mozilla/readability": "^0.6.0",
+    "preact": "^10.28.3",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.25.1"
   }
 }

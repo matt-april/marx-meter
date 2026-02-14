@@ -1,0 +1,28 @@
+{
+  "quickTake": "Basic analysis of a short article.",
+  "whoBenefits": ["Corporate interests"],
+  "whosAbsent": ["Workers"],
+  "framingChoices": [
+    {
+      "type": "euphemism",
+      "quote": "workforce optimization",
+      "explanation": "Sanitizes the reality of layoffs."
+    }
+  ],
+  "ideologicalAxes": [
+    {
+      "name": "pro_capital_vs_pro_labor",
+      "score": 3,
+      "label": "Pro-capital",
+      "explanation": "Centers business interests."
+    }
+  ],
+  "sourceAnalysis": {
+    "totalSources": 1,
+    "corporateOrOfficial": 1,
+    "workerOrCommunity": 0,
+    "anonymous": 0,
+    "summary": "Only corporate sources quoted."
+  },
+  "missingContext": "No systemic context provided."
+}

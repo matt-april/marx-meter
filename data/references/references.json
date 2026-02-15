@@ -1,150 +1,6 @@
 [
   {
-    "id": "manufacturing-consent-filters",
-    "concept_name": "The Propaganda Model & Filtering",
-    "author": "Edward S. Herman & Noam Chomsky",
-    "work_title": "Manufacturing Consent: The Political Economy of the Mass Media",
-    "year": 1988,
-    "specific_section": "Chapter 1: The Propaganda Model",
-    "plain_language_summary": "Herman and Chomsky argue that Western media systematically filters news through five 'filters': ownership/advertising, sourcing, flak, anti-communism, and the 'free market' ideology. These structural factors explain why US media consistently serve elite interests.",
-    "keywords": [
-      "propaganda",
-      "media bias",
-      "corporate media",
-      "sourcing",
-      "advertising",
-      "flak",
-      "elite",
-      "filters",
-      "manufacturing consent"
-    ],
-    "analysis_triggers": [
-      "no workers quoted",
-      "only executives",
-      "corporate sources",
-      "advertiser pressure",
-      "official sources only",
-      "no alternative perspective",
-      "no labor union",
-      "no community voices"
-    ],
-    "free_url": "https://www.marxists.org/archive/chomsky/1988/manufacturing-consent.htm"
-  },
-  {
-    "id": "gramsci-hegemony",
-    "concept_name": "Cultural Hegemony",
-    "author": "Antonio Gramsci",
-    "work_title": "Prison Notebooks (Selections)",
-    "year": "1929-1935",
-    "specific_section": "Notebook 12: The Concept of Culture",
-    "plain_language_summary": "Gramsci argues that ruling classes maintain power not just through force but by winning 'cultural hegemony'—making their worldview appear natural and common sense. Media play a key role in spreading hegemonic ideas that serve elite interests.",
-    "keywords": [
-      "hegemony",
-      "cultural dominance",
-      "common sense",
-      "ruling class",
-      "ideology",
-      "civil society",
-      "consent",
-      "organic intellectuals"
-    ],
-    "analysis_triggers": [
-      "presented as inevitable",
-      "no alternative mentioned",
-      "common sense",
-      "naturally",
-      "everyone knows",
-      "just the way it is"
-    ],
-    "free_url": "https://www.marxists.org/archive/gramsci/prison_notebooks/"
-  },
-  {
-    "id": "society-spectacle",
-    "concept_name": "The Spectacle",
-    "author": "Guy Debord",
-    "work_title": "The Society of the Spectacle",
-    "year": 1967,
-    "specific_section": "Theses 1-34",
-    "plain_language_summary": "Debord argues that modern capitalism has created a 'spectacle'—a mediated reality where direct experience is replaced by images and representations. The spectacle presents what appears to be good as good, shaping how we understand reality itself.",
-    "keywords": [
-      "spectacle",
-      "mediated reality",
-      "images",
-      "representation",
-      "consumerism",
-      "capitalist realism",
-      "appearance",
-      "reality"
-    ],
-    "analysis_triggers": [
-      "image-focused",
-      "celebrity",
-      "surface level",
-      "entertainment",
-      "as seen on tv",
-      "viral",
-      "trending"
-    ],
-    "free_url": "https://www.marxists.org/reference/archive/debord/society.htm"
-  },
-  {
-    "id": "althusser-ideology",
-    "concept_name": "Ideology & Ideological State Apparatuses",
-    "author": "Louis Althusser",
-    "work_title": "Ideology and Ideological State Apparatuses",
-    "year": 1970,
-    "specific_section": "Notes from the Essay",
-    "plain_language_summary": "Althusser argues that ideology reproduces the conditions of production by shaping how people understand their place in society. Schools, media, and religion function as 'Ideological State Apparatuses' that train people to accept existing social relations as natural.",
-    "keywords": [
-      "ideology",
-      "interpellation",
-      "ISA",
-      "hegemony",
-      "reproduction",
-      "ideological state apparatuses",
-      "subject",
-      "ideological"
-    ],
-    "analysis_triggers": [
-      "should accept",
-      "normal",
-      "proper way",
-      "citizens should",
-      "moral",
-      "values",
-      "family values"
-    ],
-    "free_url": "https://www.marxists.org/reference/archive/althusser/1970/ideology.htm"
-  },
-  {
-    "id": "german-ideology-ruling-class",
-    "concept_name": "Ruling Class Ideas",
-    "author": "Karl Marx & Friedrich Engels",
-    "work_title": "The German Ideology",
-    "year": 1846,
-    "specific_section": "Part I: Feuerbach",
-    "plain_language_summary": "Marx and Engels argue that the ideas of the ruling class become the dominant ideas in any society because they control the means of material production AND the means of mental production. The ruling ideas are the ideas of ruling material relations.",
-    "keywords": [
-      "ruling class",
-      "ideology",
-      "dominant ideology",
-      "ideas",
-      "material production",
-      "mental production",
-      "superstructure"
-    ],
-    "analysis_triggers": [
-      "experts say",
-      "officials",
-      "authorities",
-      "established",
-      "mainstream",
-      "experts agree"
-    ],
-    "free_url": "https://www.marxists.org/archive/marx/works/1845/german-ideology/"
-  },
-  {
-    "id": "capital-commodity-fetishism",
+    "id": "commodity-fetishism",
     "concept_name": "Commodity Fetishism",
     "author": "Karl Marx",
     "work_title": "Capital, Volume I",
@@ -159,7 +15,9 @@
       "natural",
       "apolitical",
       "economic",
-      "market forces"
+      "market forces",
+      "surplus value",
+      "exploitation"
     ],
     "analysis_triggers": [
       "market forces",
@@ -167,68 +25,69 @@
       "economic",
       "just business",
       "profit motive",
-      "supply and demand"
+      "supply and demand",
+      "job creators",
+      "wealth creation"
     ],
     "free_url": "https://www.marxists.org/archive/marx/works/1867-c1/"
   },
   {
-    "id": "capitalist-realism",
-    "concept_name": "Capitalist Realism",
-    "author": "Mark Fisher",
-    "work_title": "Capitalist Realism: Is There No Alternative?",
-    "year": 2009,
-    "specific_section": "Part One: The Concept",
-    "plain_language_summary": "Fisher argues that post-2008 capitalism has developed a form of 'realism' where the idea of any alternative to capitalism seems impossible or unrealistic. This 'capitalist realism' operates as a pervasive atmosphere limiting political imagination.",
+    "id": "cultural-hegemony",
+    "concept_name": "Cultural Hegemony",
+    "author": "Antonio Gramsci",
+    "work_title": "Selections from the Prison Notebooks",
+    "year": "1929-1935",
+    "specific_section": "Notebook 12: The Concept of Culture",
+    "plain_language_summary": "Gramsci argues that ruling classes maintain power not just through force but by winning 'cultural hegemony'—making their worldview appear natural and common sense. Media play a key role in spreading hegemonic ideas that serve elite interests.",
     "keywords": [
-      "capitalist realism",
-      "no alternative",
-      "TINA",
-      "impossible",
-      "realistic",
-      "there is no alternative",
-      "common sense"
+      "hegemony",
+      "cultural dominance",
+      "common sense",
+      "ruling class",
+      "ideology",
+      "civil society",
+      "consent",
+      "organic intellectuals",
+      "war of position"
     ],
     "analysis_triggers": [
-      "no alternative",
-      "unrealistic",
-      "not realistic",
-      "pie in the sky",
-      "wouldn't work",
-      "idealistic",
-      "utopian"
+      "presented as inevitable",
+      "no alternative mentioned",
+      "common sense",
+      "naturally",
+      "everyone knows",
+      "just the way it is",
+      "broad consensus",
+      "both sides"
     ],
-    "free_url": "https://www.goodreads.com/book/show/191474.Capitalist_Realism"
+    "free_url": "https://www.marxists.org/archive/gramsci/prison_notebooks/"
   },
   {
-    "id": "orientalism",
-    "concept_name": "Orientalism",
-    "author": "Edward Said",
-    "work_title": "Orientalism",
-    "year": 1978,
-    "specific_section": "Introduction",
-    "plain_language_summary": "Said argues that Western representations of 'the East' (Middle East, Asia) have been systematically distorted through a colonial lens that portrays these regions as exotic, backward, and irrational. This 'Orientalism' continues to shape how Western media cover these regions.",
+    "id": "accumulation-capital",
+    "concept_name": "Capital Accumulation & Imperialism",
+    "author": "Rosa Luxemburg",
+    "work_title": "The Accumulation of Capital",
+    "year": 1913,
+    "specific_section": "Part I: The Problem of Imperialism",
+    "plain_language_summary": "Luxemburg argues that capitalism cannot sustain itself through internal markets alone and must constantly expand into non-capitalist territories and populations. This framework reveals the economic imperatives behind military intervention and globalization narratives.",
     "keywords": [
-      "orientalism",
-      "foreign",
-      "exotic",
-      "other",
-      "western",
-      "colonial",
-      "islamophobia",
-      "Middle East",
-      "terrorist"
+      "imperialism",
+      "accumulation",
+      "expansion",
+      "colonialism",
+      "militarism",
+      "globalization",
+      "non-capitalist"
     ],
     "analysis_triggers": [
-      "terrorist",
-      "radical",
-      "extremist",
-      "backward",
-      "exotic",
-      "ancient",
-      "tribal",
-      "foreign threat"
+      "humanitarian intervention",
+      "spreading democracy",
+      "free trade",
+      "global economy",
+      "developing nations",
+      "emerging markets"
     ],
-    "free_url": "https://www.goodreads.com/book/show/29810.Orientalism"
+    "free_url": "https://www.marxists.org/archive/luxemburg/1913/accumulation/"
   },
   {
     "id": "reform-or-revolution",
@@ -255,37 +114,421 @@
       "incremental",
       "practical",
       "step by step",
-      "within the system"
+      "within the system",
+      "reasonable",
+      "common sense solution"
     ],
     "free_url": "https://www.marxists.org/archive/luxemburg/1900/reform-or-revolution/"
   },
   {
-    "id": "undoing-demos",
-    "concept_name": "Neoliberal Rationality",
-    "author": "Wendy Brown",
-    "work_title": "Undoing the Demos: The Reinvention of Democracy",
-    "year": 2015,
-    "specific_section": "Chapter 1: American Democracy in the Twilight of Neoliberalism",
-    "plain_language_summary": "Brown argues that neoliberalism is not just an economic policy but a transformation of political life itself—reducing human beings to 'human capital' and treating democracy as a market phenomenon rather than collective self-governance.",
+    "id": "mass-strike",
+    "concept_name": "Mass Strike as Organic Action",
+    "author": "Rosa Luxemburg",
+    "work_title": "The Mass Strike, the Political Party and the Trade Unions",
+    "year": 1906,
+    "specific_section": "The Mass Strike",
+    "plain_language_summary": "Luxemburg analyzes how mass strikes arise spontaneously from workers' lived experience of exploitation rather than from party directives. Economic and political struggles are inseparable, and working-class self-activity generates its own forms of organization.",
     "keywords": [
-      "neoliberalism",
-      "human capital",
-      "austerity",
-      "privatization",
-      "market",
-      "democracy",
-      "entrepreneurial",
-      "competitiveness"
+      "mass strike",
+      "labor action",
+      "working class",
+      "self-organization",
+      "spontaneous",
+      "class struggle"
     ],
     "analysis_triggers": [
-      "austerity",
-      "efficiency",
-      "cost-cutting",
-      "privatization",
-      "entrepreneur",
-      "self-reliance",
-      "personal responsibility"
+      "labor dispute",
+      "strike",
+      "work stoppage",
+      "walkout",
+      "union action",
+      "industrial action"
     ],
-    "free_url": "https://zonebooks.org/titles/Brown-Undoing-the-Demos.html"
+    "free_url": "https://www.marxists.org/archive/luxemburg/1906/mass-strike/"
+  },
+  {
+    "id": "ruling-class-ideas",
+    "concept_name": "Ruling Class Ideas & Mental Production",
+    "author": "Karl Marx & Friedrich Engels",
+    "work_title": "The German Ideology",
+    "year": 1846,
+    "specific_section": "Part I: Feuerbach",
+    "plain_language_summary": "Marx and Engels argue that the ideas of the ruling class become the dominant ideas in any society because they control the means of material production AND the means of mental production. The ruling ideas are the ideas of ruling material relations.",
+    "keywords": [
+      "ruling class",
+      "ideology",
+      "dominant ideology",
+      "ideas",
+      "material production",
+      "mental production",
+      "superstructure"
+    ],
+    "analysis_triggers": [
+      "experts say",
+      "officials",
+      "authorities",
+      "established",
+      "mainstream",
+      "experts agree",
+      "officials say"
+    ],
+    "free_url": "https://www.marxists.org/archive/marx/works/1845/german-ideology/"
+  },
+  {
+    "id": "base-superstructure",
+    "concept_name": "Base and Superstructure",
+    "author": "Karl Marx",
+    "work_title": "The German Ideology",
+    "year": 1846,
+    "specific_section": "Part I",
+    "plain_language_summary": "The economic base (means and relations of production) determines the superstructure (law, politics, ideology). The superstructure serves to reproduce the conditions of production.",
+    "keywords": [
+      "base",
+      "superstructure",
+      "economic base",
+      "ideology",
+      "law",
+      "politics",
+      "culture"
+    ],
+    "analysis_triggers": ["economic", "structural", "systemic", "root cause", "underlying"],
+    "free_url": "https://www.marxists.org/archive/marx/works/1845/german-ideology/"
+  },
+  {
+    "id": "lesser-evilism",
+    "concept_name": "Socialism From Above vs. Below",
+    "author": "Hal Draper",
+    "work_title": "The Adventures of the Socialist Program",
+    "year": "1960s-1980s",
+    "specific_section": "The Two Souls of Socialism",
+    "plain_language_summary": "Draper distinguishes between 'socialism from above' (reforms handed down by the state) and 'socialism from below' (self-emancipation by working people). The 'lesser evil' logic traps workers in supporting parties that serve capital.",
+    "keywords": [
+      "lesser evil",
+      "two souls",
+      "socialism from above",
+      "socialism from below",
+      "self-emancipation"
+    ],
+    "analysis_triggers": [
+      "lesser of two evils",
+      "vote for the lesser",
+      "pragmatic choice",
+      "best available",
+      "not ideal but"
+    ],
+    "free_url": "https://www.marxists.org/archive/draper/1966/two-souls.htm"
+  },
+  {
+    "id": "imperialism-finance-capital",
+    "concept_name": "Imperialism as Highest Stage of Capitalism",
+    "author": "Vladimir Lenin",
+    "work_title": "Imperialism, the Highest Stage of Capitalism",
+    "year": 1916,
+    "specific_section": "Chapter 1-7",
+    "plain_language_summary": "Lenin argues that imperialism is a structural stage of capitalism characterized by finance capital, monopoly, and the export of capital. Foreign policy is driven by the needs of finance capital, not diplomatic choice or national interest.",
+    "keywords": [
+      "imperialism",
+      "finance capital",
+      "monopoly",
+      "capital export",
+      "colonial",
+      "super-profits"
+    ],
+    "analysis_triggers": [
+      "national interest",
+      "foreign policy",
+      "military intervention",
+      "allies",
+      "strategic",
+      "geopolitical"
+    ],
+    "free_url": "https://www.marxists.org/archive/lenin/works/1916/imp-hsc/"
+  },
+  {
+    "id": "bourgeois-democracy",
+    "concept_name": "Bourgeois Democracy as Class Rule",
+    "author": "Vladimir Lenin",
+    "work_title": "The State and Revolution",
+    "year": 1917,
+    "specific_section": "Chapter 1-5",
+    "plain_language_summary": "Lenin argues that in bourgeois democracy, the state is an instrument of class domination. Even formal democracy serves the ruling class because the economic base determines who can participate meaningfully in political life.",
+    "keywords": ["bourgeois democracy", "state", "class rule", "dictatorship", "proletariat"],
+    "analysis_triggers": ["democracy", "voting", "election", "the people", "will of the people"],
+    "free_url": "https://www.marxists.org/archive/lenin/works/1917/state-rev/"
+  },
+  {
+    "id": "woman-question",
+    "concept_name": "The Woman Question as Class Question",
+    "author": "Clara Zetkin",
+    "work_title": "The Woman Question: Selected Writings",
+    "year": "1889-1930",
+    "specific_section": "On the Women's Question",
+    "plain_language_summary": "Zetkin argues that the oppression of women cannot be solved within capitalism—it is bound up with private property and the family as economic unit. Bourgeois feminism obscures the class division among women.",
+    "keywords": ["woman question", "gender", "feminism", "class", "women", "patriarchy"],
+    "analysis_triggers": ["women", "gender", "equality", "feminist", "women's rights"],
+    "free_url": "https://www.marxists.org/archive/zetkin/"
+  },
+  {
+    "id": "sex-marriage-family",
+    "concept_name": "Bourgeois Morality & Sexual Politics",
+    "author": "Alexandra Kollontai",
+    "work_title": "The Communist Attack on the Family",
+    "year": 1920,
+    "specific_section": "Selected Essays",
+    "plain_language_summary": "Kollontai argues that bourgeois morality and the family are ideologically constructed to serve accumulation. Women's oppression is rooted in property relations, not biology or nature.",
+    "keywords": ["marriage", "family", "morality", "sexuality", "housework", "reproduction"],
+    "analysis_triggers": ["family values", "traditional family", "marriage", "morality", "sex"],
+    "free_url": "https://www.marxists.org/archive/kollontai/"
+  },
+  {
+    "id": "black-emancipation",
+    "concept_name": "Black Self-Emancipation",
+    "author": "C. L. R. James",
+    "work_title": "The Black Jacobins",
+    "year": 1938,
+    "specific_section": "Toussaint L'Ouverture and the San Domingo Revolution",
+    "plain_language_summary": "James analyzes the Haitian Revolution as an example of Black self-emancipation, challenging narratives that erase the autonomous agency of oppressed peoples in historical change.",
+    "keywords": ["black emancipation", "self-emancipation", "colonial", "revolution", "agency"],
+    "analysis_triggers": ["race", "racial", "black", "african", "minority", "civil rights"],
+    "free_url": "https://www.marxists.org/archive/james/"
+  },
+  {
+    "id": "colonial-extraction",
+    "concept_name": "Colonial Extraction Mechanisms",
+    "author": "George Padmore",
+    "work_title": "How Britain Rules Africa",
+    "year": 1936,
+    "specific_section": "Chapters 1-6",
+    "plain_language_summary": "Padmore reveals how colonial administration is fundamentally about economic extraction disguised as civilizing mission. The rhetoric of development and modernization masks systematic plunder.",
+    "keywords": ["colonialism", "extraction", "imperialism", "development", "africa", "colonial"],
+    "analysis_triggers": [
+      "developing world",
+      "third world",
+      "aid",
+      "development",
+      "poor countries",
+      "troubled region"
+    ],
+    "free_url": "https://www.marxists.org/archive/padmore/"
+  },
+  {
+    "id": "crisis-theory",
+    "concept_name": "Crisis Theory & Falling Rate of Profit",
+    "author": "Paul Mattick",
+    "work_title": "Marx and Keynes: The Limits of the Mixed Economy",
+    "year": 1969,
+    "specific_section": "Part I-II",
+    "plain_language_summary": "Mattick argues that crises are inherent to capitalism, not caused by bad actors or poor regulation. The falling rate of profit drives periodic crises, and state intervention merely postpones rather than solves them.",
+    "keywords": ["crisis", "recession", "falling rate of profit", "overproduction", "austerity"],
+    "analysis_triggers": [
+      "recession",
+      "economic crisis",
+      "financial crisis",
+      "austerity",
+      "budget cuts",
+      "economic downturn"
+    ],
+    "free_url": "https://www.marxists.org/archive/mattick/"
+  },
+  {
+    "id": "private-property",
+    "concept_name": "Private Property as Historical Institution",
+    "author": "Paul Lafargue",
+    "work_title": "The Right to Be Lazy",
+    "year": 1883,
+    "specific_section": "Full Text",
+    "plain_language_summary": "Lafargue argues that private property is not a natural right but a historically specific institution serving class interests. The 'right to property' is really the right of the owning class to exploit labor.",
+    "keywords": ["property", "lazy", "work ethic", "right to leisure", "class"],
+    "analysis_triggers": [
+      "property rights",
+      "ownership",
+      "entrepreneur",
+      "job creators",
+      "hard work"
+    ],
+    "free_url": "https://www.marxists.org/archive/lafargue/1883/lazy/"
+  },
+  {
+    "id": "fordism",
+    "concept_name": "Fordism & Body Politics",
+    "author": "Antonio Gramsci",
+    "work_title": "Selections from the Prison Notebooks",
+    "year": "1929-1935",
+    "specific_section": "Americanism and Fordism",
+    "plain_language_summary": "Gramsci analyzes how Fordism reshapes not just production but workers' bodies, sexuality, morality, and culture to serve capital. What appears as cultural modernization is reorganization of life around accumulation.",
+    "keywords": ["fordism", "modernization", "rationalization", "productivity", "culture"],
+    "analysis_triggers": ["productivity", "modernization", "efficiency", "innovation", "progress"],
+    "free_url": "https://www.marxists.org/archive/gramsci/prison_notebooks/"
+  },
+  {
+    "id": "ideological-state-apparatuses",
+    "concept_name": "Ideological State Apparatuses",
+    "author": "Louis Althusser",
+    "work_title": "Ideology and Ideological State Apparatuses",
+    "year": 1970,
+    "specific_section": "Notes from the Essay",
+    "plain_language_summary": "Althusser argues that schools, media, and religion function as 'Ideological State Apparatuses' that train people to accept existing social relations as natural.",
+    "keywords": ["ideology", "ISA", "hegemony", "reproduction", "ideological state apparatuses"],
+    "analysis_triggers": ["should accept", "normal", "proper way", "citizens should", "values"],
+    "free_url": "https://www.marxists.org/reference/archive/althusser/1970/ideology.htm"
+  },
+  {
+    "id": "great-man-history",
+    "concept_name": "Critique of Great-Man History",
+    "author": "Georgi Plekhanov",
+    "work_title": "The Role of the Individual in History",
+    "year": 1898,
+    "specific_section": "Full Text",
+    "plain_language_summary": "Plekhanov argues that great individuals are not the primary drivers of historical change but rather express existing social forces. Their significance lies in their ability to understand and accelerate tendencies already present in society.",
+    "keywords": ["great man", "individual", "history", "material conditions", "social forces"],
+    "analysis_triggers": ["leader", "key figure", "decisive role", "brought about"],
+    "free_url": "https://www.marxists.org/archive/plekhanov/1898/role-individual.htm"
+  },
+  {
+    "id": "reification",
+    "concept_name": "Reification & Thing-Power",
+    "author": "Georg Lukács",
+    "work_title": "History and Class Consciousness",
+    "year": 1923,
+    "specific_section": "Reification and the Consciousness of the Proletariat",
+    "plain_language_summary": "Lukács develops the concept of reification—the process by which social relations appear as objective things. This extends Marx's commodity fetishism to all social phenomena under capitalism.",
+    "keywords": ["reification", "thing-power", "objectification", "consciousness"],
+    "analysis_triggers": ["objective", "fact", "reality", "given", "inevitable"],
+    "free_url": "https://www.marxists.org/archive/lukacs/1923/history-class-consciousness/"
+  },
+  {
+    "id": "permanent-revolution",
+    "concept_name": "Permanent Revolution",
+    "author": "Leon Trotsky",
+    "work_title": "Results and Prospects",
+    "year": 1906,
+    "specific_section": "The Permanece of the Revolution",
+    "plain_language_summary": "Trotsky argues that in backward countries, the bourgeois revolution cannot be completed by the bourgeoisie itself—it can only be achieved through the revolutionary action of the proletariat and peasantry, leading directly to socialist transformation.",
+    "keywords": [
+      "permanent revolution",
+      "uneven development",
+      "combined development",
+      "bourgeois revolution"
+    ],
+    "analysis_triggers": ["revolution", "uprising", "political change", "transformation"],
+    "free_url": "https://www.marxists.org/archive/trotsky/1906/1906results.htm"
+  },
+  {
+    "id": "national-question",
+    "concept_name": "National Liberation & Class",
+    "author": "James Connolly",
+    "work_title": "The Reconquest of Ireland",
+    "year": 1915,
+    "specific_section": "Selected Writings",
+    "plain_language_summary": "Connolly argues that national liberation cannot be separated from class struggle. The 'national interest' is typically the interest of the owning class, and true liberation requires challenging both foreign domination and domestic class exploitation.",
+    "keywords": ["national liberation", "nationalism", "class", "Ireland", "colonialism"],
+    "analysis_triggers": ["national interest", "patriotism", "country first", "national unity"],
+    "free_url": "https://www.marxists.org/archive/connolly/"
+  },
+  {
+    "id": "workers-councils",
+    "concept_name": "Workers' Councils & Self-Management",
+    "author": "Paul Mattick",
+    "work_title": "Council Communism",
+    "year": "1920s-1960s",
+    "specific_section": "Selected Essays",
+    "plain_language_summary": "Mattick advocates for workers' councils as the form of working-class organization that can challenge capitalist control directly, rejecting both parliamentary socialism and the bureaucratic control of trade unions.",
+    "keywords": ["councils", "workers' control", "self-management", "soviet", "direct action"],
+    "analysis_triggers": [
+      "workers control",
+      "self-management",
+      "workplace democracy",
+      "employee ownership"
+    ],
+    "free_url": "https://www.marxists.org/archive/mattick/"
+  },
+  {
+    "id": "alienated-labor",
+    "concept_name": "Alienated Labor",
+    "author": "Karl Marx",
+    "work_title": "Economic and Philosophic Manuscripts of 1844",
+    "year": 1844,
+    "specific_section": "Alienated Labor",
+    "plain_language_summary": "Marx describes how workers under capitalism are alienated from the product of their labor, the act of production, their fellow workers, and their own human potential. Work becomes a means to survival rather than self-realization.",
+    "keywords": ["alienation", "alienated labor", "estrangement", "worker", "labor"],
+    "analysis_triggers": ["job satisfaction", "work-life balance", "career", "employment"],
+    "free_url": "https://www.marxists.org/archive/marx/works/1844/manuscripts/alienation.htm"
+  },
+  {
+    "id": "critique-political-economy",
+    "concept_name": "Critique of Political Economy",
+    "author": "Karl Marx",
+    "work_title": "A Contribution to the Critique of Political Economy",
+    "year": 1859,
+    "specific_section": "Preface",
+    "plain_language_summary": "Marx outlines his materialist method: the economic base (production and relations of production) determines the superstructure (legal, political, ideological forms). This is the foundation for historical materialist analysis.",
+    "keywords": [
+      "critique of political economy",
+      "materialism",
+      "historical materialism",
+      "mode of production"
+    ],
+    "analysis_triggers": ["economic", "structural", "material conditions", "root cause"],
+    "free_url": "https://www.marxists.org/archive/marx/works/1859/critique-pol-economy/"
+  },
+  {
+    "id": "fascism-mass-movement",
+    "concept_name": "Fascism as Mass Movement",
+    "author": "Clara Zetkin",
+    "work_title": "The Struggle Against Fascism",
+    "year": 1923,
+    "specific_section": "Selected Writings",
+    "plain_language_summary": "Zetkin analyzes fascism as a mass movement recruited from the middle classes during economic crisis, using pseudo-radical rhetoric to channel discontent away from socialism and toward scapegoats.",
+    "keywords": ["fascism", "mass movement", "middle class", "crisis", "reaction"],
+    "analysis_triggers": ["extremism", "far right", "populism", "radical"],
+    "free_url": "https://www.marxists.org/archive/zetkin/"
+  },
+  {
+    "id": "inter-imperialist-rivalry",
+    "concept_name": "Inter-Imperialist Rivalry",
+    "author": "Nikolai Bukharin",
+    "work_title": "Imperialism and World Economy",
+    "year": 1915,
+    "specific_section": "Chapters 1-3",
+    "plain_language_summary": "Bukharin analyzes how capitalism leads to the formation of national blocs of finance capital that compete in world markets. Trade conflicts are really inter-capitalist struggles for spheres of influence.",
+    "keywords": ["inter-imperialist", "rivalry", "blocs", "trade war", "world economy"],
+    "analysis_triggers": ["trade war", "tariffs", "trade deficit", "competitors", "rival"],
+    "free_url": "https://www.marxists.org/archive/bukharin/"
+  },
+  {
+    "id": "origin-family-property-state",
+    "concept_name": "Origin of Family, Private Property and State",
+    "author": "Friedrich Engels",
+    "work_title": "The Origin of the Family, Private Property and the State",
+    "year": 1884,
+    "specific_section": "Chapters 1-9",
+    "plain_language_summary": "Engels argues that the family, private property, and the state all arose together as instruments of class rule. The oppression of women is bound up with the emergence of private property.",
+    "keywords": ["family", "private property", "state", "patriarchy", "women's oppression"],
+    "analysis_triggers": ["family", "traditional values", "property", "home ownership"],
+    "free_url": "https://www.marxists.org/archive/marx/works/1884/origin-family/"
+  },
+  {
+    "id": "alternative-socialism",
+    "concept_name": "Socialism From Below",
+    "author": "Hal Draper",
+    "work_title": "Karl Marx's Theory of Revolution",
+    "year": "1970s",
+    "specific_section": "The Socialization of Labor",
+    "plain_language_summary": "Draper develops a theory of socialism from below—where working people themselves organize to take control of production, rejecting both state capitalism and bureaucratic union control.",
+    "keywords": ["socialism from below", "self-management", "workers control", "democratic"],
+    "analysis_triggers": ["alternative", "socialism", "beyond capitalism", "another way"],
+    "free_url": "https://www.marxists.org/archive/draper/"
+  },
+  {
+    "id": "class-struggle",
+    "concept_name": "Class Struggle in History",
+    "author": "Karl Marx",
+    "work_title": "The Communist Manifesto",
+    "year": 1848,
+    "specific_section": "Part I: Bourgeois and Proletarians",
+    "plain_language_summary": "Marx and Engels argue that the history of all society is the history of class struggles. The bourgeoisie has torn apart the feudal ties and replaced them with pure money relations, creating new classes and class antagonisms.",
+    "keywords": ["class struggle", "bourgeoisie", "proletariat", "class conflict"],
+    "analysis_triggers": ["class", "workers", "labor", "capital", "conflict"],
+    "free_url": "https://www.marxists.org/archive/marx/works/1848/communist-manifesto/"
   }
 ]

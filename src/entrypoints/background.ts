@@ -1,6 +1,7 @@
 import { GeminiAdapter } from '../lib/ai/gemini';
+import { lookupOwnership } from '../lib/ownership/lookup';
 import type {
-  AnalysisCompleteMessage,
+  AnalysisWithOwnership as AnalysisWithOwnershipMsg,
   AnalysisErrorMessage,
 } from '../common/types';
 
@@ -19,8 +20,8 @@ export default defineBackground(() => {
     if (message.type === 'ANALYZE_ARTICLE') {
       handleAnalysis(message.payload)
         .then((result) => {
-          const response: AnalysisCompleteMessage = {
-            type: 'ANALYSIS_COMPLETE',
+          const response: AnalysisWithOwnershipMsg = {
+            type: 'ANALYSIS_WITH_OWNERSHIP',
             payload: result,
           };
           sendResponse(response);
@@ -43,9 +44,16 @@ async function handleAnalysis(article: import('../common/types').ArticleData) {
   const apiKey = storage.geminiApiKey as string | undefined;
 
   if (!apiKey) {
-    throw new Error('No Gemini API key configured. Please enter your API key in the extension settings.');
+    throw new Error(
+      'No Gemini API key configured. Please enter your API key in the extension settings.',
+    );
   }
 
   const adapter = new GeminiAdapter(apiKey);
-  return adapter.analyze(article);
+  const result = await adapter.analyze(article);
+
+  // Lookup ownership data for the article's domain
+  const ownership = lookupOwnership(article.domain);
+
+  return { analysis: result, ownership };
 }

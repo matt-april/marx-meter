@@ -22,6 +22,7 @@ export default [
         defineBackground: 'readonly',
         defineContentScript: 'readonly',
         browser: 'readonly',
+        preact: 'readonly',
       },
     },
     plugins: {

@@ -1,0 +1,291 @@
+[
+  {
+    "id": "manufacturing-consent-filters",
+    "concept_name": "The Propaganda Model & Filtering",
+    "author": "Edward S. Herman & Noam Chomsky",
+    "work_title": "Manufacturing Consent: The Political Economy of the Mass Media",
+    "year": 1988,
+    "specific_section": "Chapter 1: The Propaganda Model",
+    "plain_language_summary": "Herman and Chomsky argue that Western media systematically filters news through five 'filters': ownership/advertising, sourcing, flak, anti-communism, and the 'free market' ideology. These structural factors explain why US media consistently serve elite interests.",
+    "keywords": [
+      "propaganda",
+      "media bias",
+      "corporate media",
+      "sourcing",
+      "advertising",
+      "flak",
+      "elite",
+      "filters",
+      "manufacturing consent"
+    ],
+    "analysis_triggers": [
+      "no workers quoted",
+      "only executives",
+      "corporate sources",
+      "advertiser pressure",
+      "official sources only",
+      "no alternative perspective",
+      "no labor union",
+      "no community voices"
+    ],
+    "free_url": "https://www.marxists.org/archive/chomsky/1988/manufacturing-consent.htm"
+  },
+  {
+    "id": "gramsci-hegemony",
+    "concept_name": "Cultural Hegemony",
+    "author": "Antonio Gramsci",
+    "work_title": "Prison Notebooks (Selections)",
+    "year": "1929-1935",
+    "specific_section": "Notebook 12: The Concept of Culture",
+    "plain_language_summary": "Gramsci argues that ruling classes maintain power not just through force but by winning 'cultural hegemony'—making their worldview appear natural and common sense. Media play a key role in spreading hegemonic ideas that serve elite interests.",
+    "keywords": [
+      "hegemony",
+      "cultural dominance",
+      "common sense",
+      "ruling class",
+      "ideology",
+      "civil society",
+      "consent",
+      "organic intellectuals"
+    ],
+    "analysis_triggers": [
+      "presented as inevitable",
+      "no alternative mentioned",
+      "common sense",
+      "naturally",
+      "everyone knows",
+      "just the way it is"
+    ],
+    "free_url": "https://www.marxists.org/archive/gramsci/prison_notebooks/"
+  },
+  {
+    "id": "society-spectacle",
+    "concept_name": "The Spectacle",
+    "author": "Guy Debord",
+    "work_title": "The Society of the Spectacle",
+    "year": 1967,
+    "specific_section": "Theses 1-34",
+    "plain_language_summary": "Debord argues that modern capitalism has created a 'spectacle'—a mediated reality where direct experience is replaced by images and representations. The spectacle presents what appears to be good as good, shaping how we understand reality itself.",
+    "keywords": [
+      "spectacle",
+      "mediated reality",
+      "images",
+      "representation",
+      "consumerism",
+      "capitalist realism",
+      "appearance",
+      "reality"
+    ],
+    "analysis_triggers": [
+      "image-focused",
+      "celebrity",
+      "surface level",
+      "entertainment",
+      "as seen on tv",
+      "viral",
+      "trending"
+    ],
+    "free_url": "https://www.marxists.org/reference/archive/debord/society.htm"
+  },
+  {
+    "id": "althusser-ideology",
+    "concept_name": "Ideology & Ideological State Apparatuses",
+    "author": "Louis Althusser",
+    "work_title": "Ideology and Ideological State Apparatuses",
+    "year": 1970,
+    "specific_section": "Notes from the Essay",
+    "plain_language_summary": "Althusser argues that ideology reproduces the conditions of production by shaping how people understand their place in society. Schools, media, and religion function as 'Ideological State Apparatuses' that train people to accept existing social relations as natural.",
+    "keywords": [
+      "ideology",
+      "interpellation",
+      "ISA",
+      "hegemony",
+      "reproduction",
+      "ideological state apparatuses",
+      "subject",
+      "ideological"
+    ],
+    "analysis_triggers": [
+      "should accept",
+      "normal",
+      "proper way",
+      "citizens should",
+      "moral",
+      "values",
+      "family values"
+    ],
+    "free_url": "https://www.marxists.org/reference/archive/althusser/1970/ideology.htm"
+  },
+  {
+    "id": "german-ideology-ruling-class",
+    "concept_name": "Ruling Class Ideas",
+    "author": "Karl Marx & Friedrich Engels",
+    "work_title": "The German Ideology",
+    "year": 1846,
+    "specific_section": "Part I: Feuerbach",
+    "plain_language_summary": "Marx and Engels argue that the ideas of the ruling class become the dominant ideas in any society because they control the means of material production AND the means of mental production. The ruling ideas are the ideas of ruling material relations.",
+    "keywords": [
+      "ruling class",
+      "ideology",
+      "dominant ideology",
+      "ideas",
+      "material production",
+      "mental production",
+      "superstructure"
+    ],
+    "analysis_triggers": [
+      "experts say",
+      "officials",
+      "authorities",
+      "established",
+      "mainstream",
+      "experts agree"
+    ],
+    "free_url": "https://www.marxists.org/archive/marx/works/1845/german-ideology/"
+  },
+  {
+    "id": "capital-commodity-fetishism",
+    "concept_name": "Commodity Fetishism",
+    "author": "Karl Marx",
+    "work_title": "Capital, Volume I",
+    "year": 1867,
+    "specific_section": "Chapter 1, Section 4: The Fetishism of the Commodity",
+    "plain_language_summary": "Marx introduces the concept of 'commodity fetishism'—the way social relations between people appear as relations between things. This concept helps explain how market relationships can seem natural and apolitical when they're actually structured by power.",
+    "keywords": [
+      "commodity fetishism",
+      "market",
+      "capitalism",
+      "things",
+      "natural",
+      "apolitical",
+      "economic",
+      "market forces"
+    ],
+    "analysis_triggers": [
+      "market forces",
+      "the market",
+      "economic",
+      "just business",
+      "profit motive",
+      "supply and demand"
+    ],
+    "free_url": "https://www.marxists.org/archive/marx/works/1867-c1/"
+  },
+  {
+    "id": "capitalist-realism",
+    "concept_name": "Capitalist Realism",
+    "author": "Mark Fisher",
+    "work_title": "Capitalist Realism: Is There No Alternative?",
+    "year": 2009,
+    "specific_section": "Part One: The Concept",
+    "plain_language_summary": "Fisher argues that post-2008 capitalism has developed a form of 'realism' where the idea of any alternative to capitalism seems impossible or unrealistic. This 'capitalist realism' operates as a pervasive atmosphere limiting political imagination.",
+    "keywords": [
+      "capitalist realism",
+      "no alternative",
+      "TINA",
+      "impossible",
+      "realistic",
+      "there is no alternative",
+      "common sense"
+    ],
+    "analysis_triggers": [
+      "no alternative",
+      "unrealistic",
+      "not realistic",
+      "pie in the sky",
+      "wouldn't work",
+      "idealistic",
+      "utopian"
+    ],
+    "free_url": "https://www.goodreads.com/book/show/191474.Capitalist_Realism"
+  },
+  {
+    "id": "orientalism",
+    "concept_name": "Orientalism",
+    "author": "Edward Said",
+    "work_title": "Orientalism",
+    "year": 1978,
+    "specific_section": "Introduction",
+    "plain_language_summary": "Said argues that Western representations of 'the East' (Middle East, Asia) have been systematically distorted through a colonial lens that portrays these regions as exotic, backward, and irrational. This 'Orientalism' continues to shape how Western media cover these regions.",
+    "keywords": [
+      "orientalism",
+      "foreign",
+      "exotic",
+      "other",
+      "western",
+      "colonial",
+      "islamophobia",
+      "Middle East",
+      "terrorist"
+    ],
+    "analysis_triggers": [
+      "terrorist",
+      "radical",
+      "extremist",
+      "backward",
+      "exotic",
+      "ancient",
+      "tribal",
+      "foreign threat"
+    ],
+    "free_url": "https://www.goodreads.com/book/show/29810.Orientalism"
+  },
+  {
+    "id": "reform-or-revolution",
+    "concept_name": "Reform vs. Revolution",
+    "author": "Rosa Luxemburg",
+    "work_title": "Reform or Revolution",
+    "year": 1899,
+    "specific_section": "The Problem",
+    "plain_language_summary": "Luxemburg argues that reform and revolution cannot be separated—attempts to reform capitalism within its existing framework ultimately fail because the system inherently requires exploitation. True change requires revolutionary transformation of the relations of production.",
+    "keywords": [
+      "reform",
+      "revolution",
+      "reformism",
+      "revolutionary",
+      "incremental",
+      "systemic",
+      "structural",
+      "gradual"
+    ],
+    "analysis_triggers": [
+      "reform",
+      "compromise",
+      "bipartisan",
+      "incremental",
+      "practical",
+      "step by step",
+      "within the system"
+    ],
+    "free_url": "https://www.marxists.org/archive/luxemburg/1900/reform-or-revolution/"
+  },
+  {
+    "id": "undoing-demos",
+    "concept_name": "Neoliberal Rationality",
+    "author": "Wendy Brown",
+    "work_title": "Undoing the Demos: The Reinvention of Democracy",
+    "year": 2015,
+    "specific_section": "Chapter 1: American Democracy in the Twilight of Neoliberalism",
+    "plain_language_summary": "Brown argues that neoliberalism is not just an economic policy but a transformation of political life itself—reducing human beings to 'human capital' and treating democracy as a market phenomenon rather than collective self-governance.",
+    "keywords": [
+      "neoliberalism",
+      "human capital",
+      "austerity",
+      "privatization",
+      "market",
+      "democracy",
+      "entrepreneurial",
+      "competitiveness"
+    ],
+    "analysis_triggers": [
+      "austerity",
+      "efficiency",
+      "cost-cutting",
+      "privatization",
+      "entrepreneur",
+      "self-reliance",
+      "personal responsibility"
+    ],
+    "free_url": "https://zonebooks.org/titles/Brown-Undoing-the-Demos.html"
+  }
+]

@@ -1,0 +1,288 @@
+[
+  {
+    "domain": "nytimes.com",
+    "name": "The New York Times",
+    "parent_company": "The New York Times Company",
+    "ownership_chain": [
+      { "name": "The New York Times Company", "type": "public", "ownership_pct": 100 }
+    ],
+    "major_shareholders": [
+      { "name": "A.G. Sulzberger (Class B)", "type": "individual" },
+      { "name": "Mexican Billionaire Families (indirect)", "type": "institutional" }
+    ],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [
+      { "recipient": "Democrats", "amount": 2500000, "cycle": "2024", "party": "D" },
+      { "recipient": "Republicans", "amount": 150000, "cycle": "2024", "party": "R" }
+    ],
+    "other_properties": ["The Wirecutter", "NYT Cooking", "The Athletic"],
+    "editorial_notes": "Founded 1851. Class B shares controlled by Sulzberger family ensure editorial independence.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "washingtonpost.com",
+    "name": "The Washington Post",
+    "parent_company": "Nash Holdings",
+    "ownership_chain": [
+      { "name": "Nash Holdings", "type": "private", "ownership_pct": 100 },
+      { "name": "Jeff Bezos", "type": "individual", "ownership_pct": 100 }
+    ],
+    "major_shareholders": [{ "name": "Jeff Bezos", "type": "individual" }],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [
+      { "recipient": "Democrats", "amount": 3000000, "cycle": "2024", "party": "D" }
+    ],
+    "other_properties": ["The Washington Post Magazine"],
+    "editorial_notes": "Acquired by Jeff Bezos in 2013. Founded 1877.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "cnn.com",
+    "name": "CNN",
+    "parent_company": "Warner Bros. Discovery",
+    "ownership_chain": [
+      { "name": "Warner Bros. Discovery", "type": "public", "ownership_pct": 100 }
+    ],
+    "major_shareholders": [
+      { "name": "John Malone", "type": "individual" },
+      { "name": "Vanguard", "type": "institutional" },
+      { "name": "BlackRock", "type": "institutional" }
+    ],
+    "revenue_model": "advertising + subscription",
+    "political_donations": [
+      { "recipient": "Democrats", "amount": 1800000, "cycle": "2024", "party": "D" }
+    ],
+    "other_properties": ["CNN International", "HLN", "CNN Business"],
+    "editorial_notes": "Founded 1980. Merged with Discovery in 2022.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "foxnews.com",
+    "name": "Fox News",
+    "parent_company": "Fox Corporation",
+    "ownership_chain": [{ "name": "Fox Corporation", "type": "public", "ownership_pct": 100 }],
+    "major_shareholders": [
+      { "name": "Lachlan Murdoch", "type": "individual" },
+      { "name": "Vanguard", "type": "institutional" }
+    ],
+    "revenue_model": "advertising",
+    "political_donations": [
+      { "recipient": "Republicans", "amount": 5000000, "cycle": "2024", "party": "R" }
+    ],
+    "other_properties": ["Fox Business", "Fox Sports", "Fox Television Stations"],
+    "editorial_notes": "Founded 1996. Split from 21st Century Fox in 2019.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "wsj.com",
+    "name": "The Wall Street Journal",
+    "parent_company": "News Corp",
+    "ownership_chain": [{ "name": "News Corp", "type": "public", "ownership_pct": 100 }],
+    "major_shareholders": [
+      { "name": "Rupert Murdoch", "type": "individual" },
+      { "name": "Cramer Rosenthal", "type": "institutional" }
+    ],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [
+      { "recipient": "Republicans", "amount": 4000000, "cycle": "2024", "party": "R" }
+    ],
+    "other_properties": ["Barron's", "MarketWatch", "FN"],
+    "editorial_notes": "Founded 1889. Known for conservative editorial stance.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "reuters.com",
+    "name": "Reuters",
+    "parent_company": "Thomson Reuters",
+    "ownership_chain": [{ "name": "Thomson Reuters", "type": "public", "ownership_pct": 100 }],
+    "major_shareholders": [
+      { "name": "The Woodbridge Company", "type": "institutional" },
+      { "name": "BlackRock", "type": "institutional" }
+    ],
+    "revenue_model": "subscription + news services",
+    "political_donations": [],
+    "other_properties": ["Reuters News Agency", "Westlaw", "Check"],
+    "editorial_notes": "Founded 1851. Known for neutral, factual journalism.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "apnews.com",
+    "name": "Associated Press",
+    "parent_company": "Associated Press Cooperative",
+    "ownership_chain": [
+      { "name": "Associated Press Cooperative", "type": "nonprofit", "ownership_pct": 100 }
+    ],
+    "major_shareholders": [],
+    "revenue_model": "subscription + licensing",
+    "political_donations": [],
+    "other_properties": ["AP News", "AP Images", "AP Video"],
+    "editorial_notes": "Founded 1846. Nonprofit news cooperative owned by participating newspapers.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "npr.org",
+    "name": "NPR",
+    "parent_company": "NPR",
+    "ownership_chain": [{ "name": "NPR", "type": "nonprofit", "ownership_pct": 100 }],
+    "major_shareholders": [],
+    "revenue_model": "donations + sponsorship",
+    "political_donations": [],
+    "other_properties": ["NPR News Now", "Planet Money", "This American Life"],
+    "editorial_notes": "Founded 1970. Listener-supported, editorial independence from government.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "pbs.org",
+    "name": "PBS",
+    "parent_company": "Public Broadcasting Service",
+    "ownership_chain": [
+      { "name": "Public Broadcasting Service", "type": "nonprofit", "ownership_pct": 100 }
+    ],
+    "major_shareholders": [],
+    "revenue_model": "government funding + donations",
+    "political_donations": [],
+    "other_properties": ["PBS NewsHour", "Frontline", "NOVA"],
+    "editorial_notes": "Founded 1970. Receives federal funding but editorial独立.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "theguardian.com",
+    "name": "The Guardian",
+    "parent_company": "Guardian Media Group",
+    "ownership_chain": [{ "name": "Scott Trust", "type": "trust", "ownership_pct": 100 }],
+    "major_shareholders": [],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [],
+    "other_properties": ["The Observer", "Guardian US", "Guardian Australia"],
+    "editorial_notes": "Founded 1821. Owned by Scott Trust, prioritizes editorial independence over profit.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "huffpost.com",
+    "name": "HuffPost",
+    "parent_company": "Yahoo (Verizon Media)",
+    "ownership_chain": [
+      { "name": "Verizon Media", "type": "subsidiary", "ownership_pct": 100 },
+      { "name": "Apollo Global Management", "type": "private_equity", "ownership_pct": 100 }
+    ],
+    "major_shareholders": [{ "name": "Apollo Global Management", "type": "private_equity" }],
+    "revenue_model": "advertising",
+    "political_donations": [],
+    "other_properties": ["Yahoo News", "TechCrunch", "AOL"],
+    "editorial_notes": "Founded 2005. Sold to Verizon 2019, then to Apollo 2021.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "politico.com",
+    "name": "Politico",
+    "parent_company": "Axios",
+    "ownership_chain": [{ "name": "Axios Media", "type": "public", "ownership_pct": 100 }],
+    "major_shareholders": [
+      { "name": "Cox Enterprises", "type": "institutional" },
+      { "name": "BlackRock", "type": "institutional" }
+    ],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [],
+    "other_properties": ["Politico Europe", "Playbook", "Morning Score"],
+    "editorial_notes": "Founded 2007. Known for political journalism and insider coverage.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "thehill.com",
+    "name": "The Hill",
+    "parent_company": "The Hill Media",
+    "ownership_chain": [{ "name": "The Hill Media", "type": "private", "ownership_pct": 100 }],
+    "major_shareholders": [{ "name": "James B. Finkel", "type": "individual" }],
+    "revenue_model": "advertising",
+    "political_donations": [],
+    "other_properties": ["The Hill TV", "Rising"],
+    "editorial_notes": "Founded 1994. Center-right editorial stance.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "axios.com",
+    "name": "Axios",
+    "parent_company": "Axios Media",
+    "ownership_chain": [{ "name": "Axios Media", "type": "public", "ownership_pct": 100 }],
+    "major_shareholders": [
+      { "name": "Cox Enterprises", "type": "institutional" },
+      { "name": "BlackRock", "type": "institutional" }
+    ],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [],
+    "other_properties": ["Axios Pro", "Axios Sports", "Axios Local"],
+    "editorial_notes": "Founded 2017 by former Politico journalists. Known for concise news.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "vice.com",
+    "name": "Vice",
+    "parent_company": "Vice Media",
+    "ownership_chain": [{ "name": "Vice Media", "type": "private", "ownership_pct": 100 }],
+    "major_shareholders": [
+      { "name": "Luminate", "type": "institutional" },
+      { "name": "The Raine Group", "type": "institutional" }
+    ],
+    "revenue_model": "advertising + content deals",
+    "political_donations": [],
+    "other_properties": ["Vice News", "Viceland", "Vice Studios"],
+    "editorial_notes": "Founded 2004. Known for youth-focused documentary content.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "vox.com",
+    "name": "Vox",
+    "parent_company": "Vox Media",
+    "ownership_chain": [{ "name": "Vox Media", "type": "private", "ownership_pct": 100 }],
+    "major_shareholders": [
+      { "name": "Comcast Ventures", "type": "institutional" },
+      { "name": "Accel", "type": "institutional" }
+    ],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [],
+    "other_properties": ["New York Magazine", "The Cut", "Grub Street"],
+    "editorial_notes": "Founded 2014. Known for explainer journalism.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "bloomberg.com",
+    "name": "Bloomberg",
+    "parent_company": "Bloomberg L.P.",
+    "ownership_chain": [{ "name": "Bloomberg L.P.", "type": "private", "ownership_pct": 100 }],
+    "major_shareholders": [{ "name": "Michael Bloomberg", "type": "individual" }],
+    "revenue_model": "subscription",
+    "political_donations": [
+      { "recipient": "Democrats", "amount": 15000000, "cycle": "2024", "party": "D" }
+    ],
+    "other_properties": ["Bloomberg Law", "Bloomberg Tax", "Bloomberg TV"],
+    "editorial_notes": "Founded 1981. Michael Bloomberg also owns 90% of News Corp.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "businessinsider.com",
+    "name": "Business Insider",
+    "parent_company": "Insider Inc.",
+    "ownership_chain": [
+      { "name": "Insider Inc.", "type": "subsidiary", "ownership_pct": 100 },
+      { "name": "Axel Springer", "type": "public", "ownership_pct": 100 }
+    ],
+    "major_shareholders": [{ "name": "Axel Springer", "type": "public" }],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [],
+    "other_properties": ["Insider Intelligence", "Markets Insider"],
+    "editorial_notes": "Founded 2007. Acquired by Axel Springer in 2015.",
+    "last_updated": "2026-02-01"
+  },
+  {
+    "domain": "thedailybeast.com",
+    "name": "The Daily Beast",
+    "parent_company": "The Daily Beast",
+    "ownership_chain": [{ "name": "The Daily Beast", "type": "private", "ownership_pct": 100 }],
+    "major_shareholders": [{ "name": "John F. W. Rogers (founder)", "type": "individual" }],
+    "revenue_model": "subscription + advertising",
+    "political_donations": [],
+    "other_properties": ["The New Beast"],
+    "editorial_notes": "Founded 2008 by Tina Brown and John W. Rogers.",
+    "last_updated": "2026-02-01"
+  }
+]

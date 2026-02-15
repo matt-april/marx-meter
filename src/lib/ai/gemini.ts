@@ -36,6 +36,32 @@ export class GeminiAdapter implements AIProvider {
     return validated;
   }
 
+  async *stream(article: ArticleData): AsyncGenerator<string, AnalysisResult, unknown> {
+    const prompt = buildAnalysisPrompt(article);
+
+    const stream = await this.client.models.generateContentStream({
+      model: this.model,
+      contents: prompt,
+      config: {
+        responseMimeType: 'application/json',
+        responseJsonSchema: zodToJsonSchema(AnalysisResultSchema),
+        temperature: 0.3,
+      },
+    });
+
+    let fullText = '';
+    for await (const chunk of stream) {
+      const text = chunk.text;
+      if (text) {
+        fullText += text;
+        yield text;
+      }
+    }
+
+    const validated = AnalysisResultSchema.parse(JSON.parse(fullText));
+    return validated;
+  }
+
   async validateKey(apiKey: string): Promise<boolean> {
     try {
       const testClient = new GoogleGenAI({ apiKey });

@@ -4,12 +4,14 @@ import type { OutletOwnership } from '../../lib/ownership/types';
 import { matchReferences } from '../../lib/references/matcher';
 import type { MatchedReference } from '../../lib/references/types';
 import { useHighlightsStore } from '../../lib/highlights/store';
+import type { Highlight } from '../../lib/highlights/types';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { ErrorDisplay } from './components/ErrorDisplay';
 import { ApiKeyInput } from './components/ApiKeyInput';
 import { OwnershipCard, OwnershipUnknown } from './components/OwnershipCard';
 import { FurtherReading } from './components/FurtherReading';
 import { CollapsibleSection } from './components/CollapsibleSection';
+import { FailedHighlights } from './components/FailedHighlights';
 
 type AppState =
   | { status: 'idle' }
@@ -32,6 +34,7 @@ export function App() {
   const [state, setState] = useState<AppState>({ status: 'idle' });
   const [isDarkMode, setIsDarkMode] = useState(true);
   const { enabled: highlightsEnabled, toggle: toggleHighlights } = useHighlightsStore();
+  const [failedHighlights, setFailedHighlights] = useState<Highlight[]>([]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -40,6 +43,16 @@ export function App() {
     const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
     mediaQuery.addEventListener('change', handler);
     return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  useEffect(() => {
+    browser.storage.local
+      .get('failedHighlights')
+      .then((storage: { failedHighlights?: Highlight[] }) => {
+        if (storage.failedHighlights) {
+          setFailedHighlights(storage.failedHighlights);
+        }
+      });
   }, []);
 
   // Check for API key on mount
@@ -286,6 +299,8 @@ export function App() {
           </CollapsibleSection>
 
           {state.references.length > 0 && <FurtherReading references={state.references} />}
+
+          <FailedHighlights highlights={failedHighlights} />
 
           <button
             onClick={handleAnalyze}

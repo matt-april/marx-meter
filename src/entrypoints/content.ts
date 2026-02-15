@@ -20,6 +20,17 @@ export default defineContentScript({
   main() {
     console.log('Marx Meter content script loaded.');
 
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'MARX_METER_HIGHLIGHT_REPORT') {
+        browser.storage.local.set({ lastHighlightReport: event.data.payload });
+
+        const report = event.data.payload;
+        if (report.failed > 0) {
+          console.warn(`Marx Meter: ${report.failed}/${report.total} highlights failed to render`);
+        }
+      }
+    });
+
     browser.runtime.onMessage.addListener(
       (
         message:
@@ -44,7 +55,11 @@ export default defineContentScript({
               .then((storage: { lastAnalysis?: AnalysisResult }) => {
                 if (storage.lastAnalysis) {
                   const highlights = convertAnalysisToHighlights(storage.lastAnalysis);
-                  injectHighlights(highlights);
+                  const report = injectHighlights(highlights);
+                  const failedHighlights = report.attempts
+                    .filter((a) => !a.success)
+                    .map((a) => a.highlight);
+                  browser.storage.local.set({ failedHighlights });
                 }
               });
           } else {
@@ -56,8 +71,12 @@ export default defineContentScript({
         }
 
         if (message.type === 'INJECT_HIGHLIGHTS') {
-          injectHighlights(message.payload);
-          sendResponse({ success: true });
+          const report = injectHighlights(message.payload);
+          const failedHighlights = report.attempts
+            .filter((a) => !a.success)
+            .map((a) => a.highlight);
+          browser.storage.local.set({ failedHighlights });
+          sendResponse({ success: true, report });
           return true;
         }
 
@@ -75,7 +94,11 @@ export default defineContentScript({
             .then((storage: { highlightsEnabled?: boolean }) => {
               if (storage.highlightsEnabled !== false) {
                 const highlights = convertAnalysisToHighlights(analysis);
-                injectHighlights(highlights);
+                const report = injectHighlights(highlights);
+                const failedHighlights = report.attempts
+                  .filter((a) => !a.success)
+                  .map((a) => a.highlight);
+                browser.storage.local.set({ failedHighlights });
               }
             });
         }

@@ -14,6 +14,25 @@ export const HighlightSchema = z.object({
 
 export type Highlight = z.infer<typeof HighlightSchema>;
 
+export const HighlightAttemptSchema = z.object({
+  highlight: HighlightSchema,
+  success: z.boolean(),
+  method: z.enum(['exact', 'tokenized', 'partial', 'fallback']),
+  matchedText: z.string().optional(),
+  error: z.string().optional(),
+});
+
+export type HighlightAttempt = z.infer<typeof HighlightAttemptSchema>;
+
+export const HighlightReportSchema = z.object({
+  total: z.number(),
+  succeeded: z.number(),
+  failed: z.number(),
+  attempts: z.array(HighlightAttemptSchema),
+});
+
+export type HighlightReport = z.infer<typeof HighlightReportSchema>;
+
 export const highlightColors: Record<
   HighlightType,
   { bg: string; border: string; tooltip: string }

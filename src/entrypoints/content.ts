@@ -153,56 +153,20 @@ function convertAnalysisToHighlights(analysis: AnalysisResult) {
   const highlights: ReturnType<typeof HighlightSchema.parse>[] = [];
 
   for (const framing of analysis.framingChoices) {
-    if (framing.type === 'euphemism') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'euphemism',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    } else if (framing.type === 'source_bias') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'sourcing',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    } else if (framing.type === 'omission') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'missing_context',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    } else if (framing.type === 'passive_voice') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'euphemism',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    } else if (framing.type === 'headline_mismatch') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'missing_context',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    } else if (framing.type === 'other') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'euphemism',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    }
+    const highlightType = framing.type;
+    highlights.push({
+      id: `framing-${highlights.length}`,
+      type: highlightType,
+      text: framing.quote,
+      explanation: framing.explanation,
+    });
   }
 
   if (analysis.missingContext) {
     const firstParagraph = analysis.quickTake.split('.')[0];
     highlights.push({
       id: 'missing-context',
-      type: 'missing_context',
+      type: 'omission',
       text: firstParagraph,
       explanation: analysis.missingContext,
     });

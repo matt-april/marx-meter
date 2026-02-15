@@ -1,6 +1,13 @@
 import { z } from 'zod';
 
-export const HighlightTypeSchema = z.enum(['euphemism', 'sourcing', 'missing_context']);
+export const HighlightTypeSchema = z.enum([
+  'euphemism',
+  'passive_voice',
+  'source_bias',
+  'omission',
+  'headline_mismatch',
+  'other',
+]);
 
 export type HighlightType = z.infer<typeof HighlightTypeSchema>;
 
@@ -42,15 +49,30 @@ export const highlightColors: Record<
     border: 'rgba(239, 68, 68, 0.5)',
     tooltip: 'Euphemism detected',
   },
-  sourcing: {
+  passive_voice: {
+    bg: 'rgba(249, 115, 22, 0.15)',
+    border: 'rgba(249, 115, 22, 0.5)',
+    tooltip: 'Passive Voice',
+  },
+  source_bias: {
     bg: 'rgba(234, 179, 8, 0.2)',
     border: 'rgba(234, 179, 8, 0.5)',
-    tooltip: 'Sourcing concern',
+    tooltip: 'Source Bias',
   },
-  missing_context: {
+  omission: {
     bg: 'rgba(59, 130, 246, 0.15)',
     border: 'rgba(59, 130, 246, 0.5)',
-    tooltip: 'Missing context',
+    tooltip: 'Omission',
+  },
+  headline_mismatch: {
+    bg: 'rgba(168, 85, 247, 0.15)',
+    border: 'rgba(168, 85, 247, 0.5)',
+    tooltip: 'Headline Mismatch',
+  },
+  other: {
+    bg: 'rgba(161, 161, 170, 0.15)',
+    border: 'rgba(161, 161, 170, 0.5)',
+    tooltip: 'Other Framing',
   },
 };
 

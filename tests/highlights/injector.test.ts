@@ -9,7 +9,7 @@ describe('injector', () => {
 
   beforeEach(() => {
     dom = new JSDOM(
-      '<!DOCTYPE html><html><body><p>Test paragraph with some text here.</p><p>More content about euphemisms and sourcing.</p></body></html>',
+      '<!DOCTYPE html><html><body><p>Test paragraph with some text here.</p><p>More content about euphemisms and source_bias.</p></body></html>',
     );
     document = dom.window.document;
     window = dom.window as unknown as Window;
@@ -42,7 +42,7 @@ describe('injector', () => {
     const highlights: Highlight[] = [
       {
         id: 'test-1',
-        type: 'sourcing',
+        type: 'source_bias',
         text: 'text',
         explanation: 'Test',
       },
@@ -62,9 +62,9 @@ describe('injector', () => {
     const highlights: Highlight[] = [
       {
         id: 'test-1',
-        type: 'euphemism',
-        text: 'euphemisms',
-        explanation: 'Euphemism used to obscure meaning',
+        type: 'source_bias',
+        text: 'text',
+        explanation: 'Test',
       },
     ];
 
@@ -82,7 +82,7 @@ describe('injector', () => {
     const highlights: Highlight[] = [
       {
         id: 'test-1',
-        type: 'sourcing',
+        type: 'source_bias',
         text: 'text',
         explanation: 'Test',
       },
@@ -100,7 +100,7 @@ describe('injector', () => {
 
     const highlights: Highlight[] = [
       { id: '1', type: 'euphemism', text: 'euphemisms', explanation: 'Test' },
-      { id: '2', type: 'sourcing', text: 'text here', explanation: 'Test' },
+      { id: '2', type: 'source_bias', text: 'text here', explanation: 'Test' },
     ];
 
     injectHighlights(highlights);
@@ -113,7 +113,7 @@ describe('injector', () => {
     const { injectHighlights } = await import('../../src/lib/highlights/injector');
 
     const highlights: Highlight[] = [
-      { id: '1', type: 'missing_context', text: 'nonexistent text xyz', explanation: 'Test' },
+      { id: '1', type: 'omission', text: 'nonexistent text xyz', explanation: 'Test' },
     ];
 
     expect(() => injectHighlights(highlights)).not.toThrow();
@@ -185,7 +185,7 @@ describe('injector', () => {
       const highlights: Highlight[] = [
         {
           id: 'test-tooltip',
-          type: 'sourcing',
+          type: 'source_bias',
           text: 'text here',
           explanation: 'Source bias detected',
         },
@@ -195,14 +195,14 @@ describe('injector', () => {
 
       const tooltip = document.getElementById('tooltip-test-tooltip');
       expect(tooltip?.innerHTML).toContain('Source bias detected');
-      expect(tooltip?.innerHTML).toContain('Sourcing concern');
+      expect(tooltip?.innerHTML).toContain('Source Bias');
     });
 
     it('tooltip has proper role attribute for accessibility', async () => {
       const { injectHighlights } = await import('../../src/lib/highlights/injector');
 
       const highlights: Highlight[] = [
-        { id: 'style-test', type: 'missing_context', text: 'text', explanation: 'Test' },
+        { id: 'style-test', type: 'omission', text: 'text', explanation: 'Test' },
       ];
 
       injectHighlights(highlights);

@@ -92,8 +92,11 @@ function ensureShadowRoot(): ShadowRoot {
       border-left: 3px solid;
     }
     .fallback-item.euphemism { border-color: #ef4444; }
-    .fallback-item.sourcing { border-color: #eab308; }
-    .fallback-item.missing_context { border-color: #3b82f6; }
+    .fallback-item.passive_voice { border-color: #f97316; }
+    .fallback-item.source_bias { border-color: #eab308; }
+    .fallback-item.omission { border-color: #3b82f6; }
+    .fallback-item.headline_mismatch { border-color: #a855f7; }
+    .fallback-item.other { border-color: #a1a1aa; }
     .fallback-label {
       font-size: 11px;
       font-weight: 600;
@@ -292,8 +295,19 @@ function tryTokenizedMatch(doc: Document, text: string): { range: Range; matched
       const index = nodeText.indexOf(token);
       if (index === -1) continue;
 
-      const start = Math.max(0, index - 20);
-      const end = Math.min(nodeText.length, index + token.length + 20);
+      const sentenceStartMatch = nodeText
+        .slice(0, index + token.length)
+        .match(/[.!?\n]\s*([^.!?]*)$/);
+      const sentenceStart = sentenceStartMatch ? (sentenceStartMatch.index ?? 0) + 1 : 0;
+
+      const afterToken = nodeText.slice(index);
+      const sentenceEndMatch = afterToken.match(/[.!?]\s*/);
+      const sentenceEnd = sentenceEndMatch
+        ? index + token.length + (sentenceEndMatch.index ?? 0) + sentenceEndMatch[0].length
+        : nodeText.length;
+
+      const start = Math.max(0, sentenceStart);
+      const end = Math.min(nodeText.length, sentenceEnd);
       const context = nodeText.slice(start, end);
 
       let score = 0;
@@ -301,7 +315,7 @@ function tryTokenizedMatch(doc: Document, text: string): { range: Range; matched
         if (context.toLowerCase().includes(t.toLowerCase())) score++;
       }
 
-      if (score > (bestMatch?.score ?? 0)) {
+      if (score > (bestMatch?.score ?? 0) && context.trim().length > 0) {
         try {
           const range = doc.createRange();
           range.setStart(node, start);
@@ -356,7 +370,7 @@ function tryPartialMatch(doc: Document, text: string): Range[] {
     }
   }
 
-  return sentences.slice(0, 3).map((s) => s.range);
+  return sentences.slice(0, 10).map((s) => s.range);
 }
 
 function trySurroundContents(range: Range, span: HTMLSpanElement): boolean {

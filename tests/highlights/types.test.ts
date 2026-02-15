@@ -9,13 +9,17 @@ import {
 describe('HighlightTypeSchema', () => {
   it('accepts valid highlight types', () => {
     expect(HighlightTypeSchema.parse('euphemism')).toBe('euphemism');
-    expect(HighlightTypeSchema.parse('sourcing')).toBe('sourcing');
-    expect(HighlightTypeSchema.parse('missing_context')).toBe('missing_context');
+    expect(HighlightTypeSchema.parse('passive_voice')).toBe('passive_voice');
+    expect(HighlightTypeSchema.parse('source_bias')).toBe('source_bias');
+    expect(HighlightTypeSchema.parse('omission')).toBe('omission');
+    expect(HighlightTypeSchema.parse('headline_mismatch')).toBe('headline_mismatch');
+    expect(HighlightTypeSchema.parse('other')).toBe('other');
   });
 
   it('rejects invalid highlight types', () => {
     expect(() => HighlightTypeSchema.parse('invalid')).toThrow();
-    expect(() => HighlightTypeSchema.parse('other')).toThrow();
+    expect(() => HighlightTypeSchema.parse('sourcing')).toThrow();
+    expect(() => HighlightTypeSchema.parse('missing_context')).toThrow();
   });
 });
 
@@ -33,7 +37,7 @@ describe('HighlightSchema', () => {
   it('parses highlight with optional reference', () => {
     const highlight = {
       id: 'test-2',
-      type: 'sourcing',
+      type: 'source_bias',
       text: 'quoted text',
       explanation: 'Source bias detected',
       reference: 'Marx, Capital Vol I',
@@ -54,16 +58,34 @@ describe('highlightColors', () => {
     expect(highlightColors.euphemism.tooltip).toBe('Euphemism detected');
   });
 
-  it('has correct colors for sourcing', () => {
-    expect(highlightColors.sourcing.bg).toBe('rgba(234, 179, 8, 0.2)');
-    expect(highlightColors.sourcing.border).toBe('rgba(234, 179, 8, 0.5)');
-    expect(highlightColors.sourcing.tooltip).toBe('Sourcing concern');
+  it('has correct colors for source_bias', () => {
+    expect(highlightColors.source_bias.bg).toBe('rgba(234, 179, 8, 0.2)');
+    expect(highlightColors.source_bias.border).toBe('rgba(234, 179, 8, 0.5)');
+    expect(highlightColors.source_bias.tooltip).toBe('Source Bias');
   });
 
-  it('has correct colors for missing_context', () => {
-    expect(highlightColors.missing_context.bg).toBe('rgba(59, 130, 246, 0.15)');
-    expect(highlightColors.missing_context.border).toBe('rgba(59, 130, 246, 0.5)');
-    expect(highlightColors.missing_context.tooltip).toBe('Missing context');
+  it('has correct colors for omission', () => {
+    expect(highlightColors.omission.bg).toBe('rgba(59, 130, 246, 0.15)');
+    expect(highlightColors.omission.border).toBe('rgba(59, 130, 246, 0.5)');
+    expect(highlightColors.omission.tooltip).toBe('Omission');
+  });
+
+  it('has correct colors for passive_voice', () => {
+    expect(highlightColors.passive_voice.bg).toBe('rgba(249, 115, 22, 0.15)');
+    expect(highlightColors.passive_voice.border).toBe('rgba(249, 115, 22, 0.5)');
+    expect(highlightColors.passive_voice.tooltip).toBe('Passive Voice');
+  });
+
+  it('has correct colors for headline_mismatch', () => {
+    expect(highlightColors.headline_mismatch.bg).toBe('rgba(168, 85, 247, 0.15)');
+    expect(highlightColors.headline_mismatch.border).toBe('rgba(168, 85, 247, 0.5)');
+    expect(highlightColors.headline_mismatch.tooltip).toBe('Headline Mismatch');
+  });
+
+  it('has correct colors for other', () => {
+    expect(highlightColors.other.bg).toBe('rgba(161, 161, 170, 0.15)');
+    expect(highlightColors.other.border).toBe('rgba(161, 161, 170, 0.5)');
+    expect(highlightColors.other.tooltip).toBe('Other Framing');
   });
 });
 
@@ -74,20 +96,20 @@ describe('getHighlightColors', () => {
     expect(colors.tooltip).toBe('Euphemism detected');
   });
 
-  it('returns colors for valid sourcing type', () => {
-    const colors = getHighlightColors('sourcing');
+  it('returns colors for valid source_bias type', () => {
+    const colors = getHighlightColors('source_bias');
     expect(colors.bg).toBe('rgba(234, 179, 8, 0.2)');
-    expect(colors.tooltip).toBe('Sourcing concern');
+    expect(colors.tooltip).toBe('Source Bias');
   });
 
-  it('returns colors for valid missing_context type', () => {
-    const colors = getHighlightColors('missing_context');
+  it('returns colors for valid omission type', () => {
+    const colors = getHighlightColors('omission');
     expect(colors.bg).toBe('rgba(59, 130, 246, 0.15)');
-    expect(colors.tooltip).toBe('Missing context');
+    expect(colors.tooltip).toBe('Omission');
   });
 
   it('falls back to euphemism colors for unknown type', () => {
-    const colors = getHighlightColors('euphemism' as 'euphemism' | 'sourcing' | 'missing_context');
+    const colors = getHighlightColors('euphemism' as 'euphemism' | 'source_bias' | 'omission');
     expect(colors).toEqual(highlightColors.euphemism);
   });
 });

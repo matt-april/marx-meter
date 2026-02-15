@@ -6,7 +6,7 @@ export default defineConfig({
   srcDir: 'src',
   manifest: {
     name: 'Marx Meter',
-    description: "Decode the news. Who benefits? Now you'll know.",
+    description: 'Which side are you on?',
     version: '0.1.0',
     action: {},
     permissions: ['storage', 'activeTab'],

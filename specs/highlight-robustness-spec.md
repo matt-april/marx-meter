@@ -1451,6 +1451,8 @@ function setupMutationObserver(): void {
 
 ### Bug 5: Highlight Color Doesn't Match Framing Type
 
+**Status:** FIXED - All 6 framing types now have matching colors.
+
 **Symptom:** Source bias highlights appear red instead of yellow (or wrong colors for other types).
 
 **Root Cause:**

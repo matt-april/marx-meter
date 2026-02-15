@@ -81,7 +81,7 @@ describe('injector - Robust Highlight System', () => {
       const highlights: Highlight[] = [
         {
           id: 'test-1',
-          type: 'sourcing',
+          type: 'source_bias',
           text: 'workers community consulted',
           explanation: 'Sourcing concern',
         },
@@ -100,7 +100,7 @@ describe('injector - Robust Highlight System', () => {
       const highlights: Highlight[] = [
         {
           id: 'test-1',
-          type: 'missing_context',
+          type: 'omission',
           text: 'about changes',
           explanation: 'Should find partial',
         },

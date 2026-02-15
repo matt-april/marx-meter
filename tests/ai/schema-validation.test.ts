@@ -51,9 +51,7 @@ describe('AnalysisResultSchema', () => {
   it('rejects invalid framing choice type', () => {
     const invalid = {
       ...validResponse,
-      framingChoices: [
-        { type: 'not_a_valid_type', quote: 'test', explanation: 'test' },
-      ],
+      framingChoices: [{ type: 'not_a_valid_type', quote: 'test', explanation: 'test' }],
     };
     const result = AnalysisResultSchema.safeParse(invalid);
     expect(result.success).toBe(false);
@@ -62,16 +60,14 @@ describe('AnalysisResultSchema', () => {
   it('rejects invalid axis name', () => {
     const invalid = {
       ...validResponse,
-      ideologicalAxes: [
-        { name: 'fake_axis', score: 5, label: 'test', explanation: 'test' },
-      ],
+      ideologicalAxes: [{ name: 'fake_axis', score: 5, label: 'test', explanation: 'test' }],
     };
     const result = AnalysisResultSchema.safeParse(invalid);
     expect(result.success).toBe(false);
   });
 
   it('rejects when quickTake is missing', () => {
-    const { quickTake: _quickTake, ...rest } = validResponse;
+    const { quickTake: _quickTake, ...rest } = validResponse; // eslint-disable-line @typescript-eslint/no-unused-vars
     const result = AnalysisResultSchema.safeParse(rest);
     expect(result.success).toBe(false);
   });

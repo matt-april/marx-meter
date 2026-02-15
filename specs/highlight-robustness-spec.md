@@ -1205,13 +1205,392 @@ describe('injector - Robust Highlight System', () => {
 
 ---
 
-## Success Metrics
+## Bug Fixes — Issues Found in Production
 
-| Metric                     | Target                         |
-| -------------------------- | ------------------------------ |
-| Exact match success rate   | >70%                           |
-| Tokenized fallback success | >90% cumulative                |
-| Partial fallback success   | >95% cumulative                |
-| Silent failures            | 0 (always fallback visible)    |
-| Mutation resilience        | Highlights survive DOM changes |
-| Accessibility              | Keyboard navigable             |
+This section documents bugs discovered during testing on CNN articles and provides explicit fix instructions for implementation.
+
+### Bug 1: Highlights Get Darker on Re-Enable
+
+**Symptom:** Every time highlights are toggled off and back on, the highlights appear progressively darker/bolder.
+
+**Root Cause:** The `clearHighlights()` function (`src/lib/highlights/injector.ts:463-476`) removes the host element from the DOM but does NOT remove the highlight `<span>` elements that were injected into the article content. When highlights are re-enabled, new spans are added on top of existing spans, causing visual overlap.
+
+**Fix in `src/lib/highlights/injector.ts`:**
+
+Add a function to unwrap existing highlight spans before clearing:
+
+```typescript
+function unwrapHighlights(): void {
+  const highlights = document.querySelectorAll('.highlight');
+  highlights.forEach((span) => {
+    const parent = span.parentNode;
+    if (parent) {
+      while (span.firstChild) {
+        parent.insertBefore(span.firstChild, span);
+      }
+      parent.removeChild(span);
+    }
+  });
+}
+
+export function clearHighlights(): void {
+  // ADD THIS LINE at the start of clearHighlights
+  unwrapHighlights(); // <-- ADD THIS LINE
+
+  if (mutationObserver) {
+    mutationObserver.disconnect();
+    mutationObserver = null;
+  }
+  // ... rest of function
+}
+```
+
+**Why this works:** Before removing the host element, we find all `.highlight` spans in the document, unwrap them by inserting their children before the span, then remove the span. This cleanly removes highlights without leaving duplicates.
+
+---
+
+### Bug 2: Highlights Stop Mid-Word / Random Positions
+
+**Symptom:** First few highlights work, then they stop working. Sometimes highlights only cover half a word.
+
+**Root Cause:** Multiple issues:
+
+1. **Line 208 in `tryExactMatch`**: `if (ranges.length >= 3) return ranges;` — Only finds first 3 matches per highlight text, then stops
+2. **TreeWalker limitations**: The walker only processes text nodes that exist at injection time. Lazy-loaded content (common in CNN and other news sites) is not searched.
+3. **Cross-element boundaries**: The exact match only works within a single TextNode. If a quote spans `<p>word <em>more</em></p>`, it fails.
+
+**Fix in `src/lib/highlights/injector.ts`:**
+
+1. Remove the artificial 3-match limit:
+
+```typescript
+// REMOVE this line from tryExactMatch (around line 208):
+// if (ranges.length >= 3) return ranges;
+
+// REPLACE with:
+return ranges; // Return all matches found
+```
+
+2. Add debug logging to help diagnose remaining failures:
+
+```typescript
+// In injectHighlights function, after the matching attempts:
+if (!success) {
+  // Add this diagnostic info
+  console.warn(`Marx Meter highlight failed:`, {
+    text: highlight.text.substring(0, 50),
+    method: method || 'none tried',
+    error,
+    // Add these for debugging:
+    articleTextLength: document.body.textContent?.length || 0,
+    textNodeCount: document.querySelectorAll(
+      'p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, span, div',
+    ).length,
+  });
+}
+```
+
+---
+
+### Bug 3: No Tooltip / Hover / Click Functionality
+
+**Symptom:** Highlights appear but nothing happens on hover, click, or focus.
+
+**Root Cause:** The CSS for tooltips exists in the shadow DOM but the hover/click events are not triggering because:
+
+1. The host element has `pointer-events: none` but child spans have `pointer-events: auto`
+2. However, the tooltip is positioned with `bottom: 100%` relative to the span, but spans are positioned in the document flow, not absolutely positioned
+3. The tooltip might be rendering but appearing behind other content due to z-index issues
+
+**Fix in `src/lib/highlights/injector.ts`:**
+
+1. Change tooltip positioning to work within the document flow:
+
+```typescript
+// In createHighlightSpan function, change tooltip CSS:
+// Replace the tooltip styles around line 45-78 with:
+
+const tooltip = document.createElement('div');
+tooltip.className = 'tooltip';
+tooltip.id = `tooltip-${highlight.id}`;
+tooltip.setAttribute('role', 'tooltip');
+tooltip.style.cssText = `
+  position: absolute;
+  display: none;
+  z-index: 1000000;
+  padding: 8px 12px;
+  background: #171717;
+  color: #e5e5e5;
+  font-size: 12px;
+  line-height: 1.4;
+  border-radius: 6px;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+`;
+tooltip.innerHTML = `
+  <strong>${colors.tooltip}</strong><br/>
+  <span style="font-style: italic; opacity: 0.8;">"${matchedText}"</span><br/>
+  ${highlight.explanation}
+`;
+```
+
+2. Add explicit hover/focus handlers to show tooltip:
+
+```typescript
+// After creating the span, add these event handlers:
+
+span.addEventListener('mouseenter', () => {
+  tooltip.style.display = 'block';
+
+  // Position tooltip above the span
+  const rect = span.getBoundingClientRect();
+  tooltip.style.bottom = window.innerHeight - rect.top + 8 + 'px';
+  tooltip.style.left = rect.left + 'px';
+});
+
+span.addEventListener('mouseleave', () => {
+  tooltip.style.display = 'none';
+});
+
+span.addEventListener('focus', () => {
+  tooltip.style.display = 'block';
+});
+```
+
+3. Add the tooltip to the document body (not shadow DOM) so it overlays correctly:
+
+```typescript
+// At the end of createHighlightSpan, append tooltip to body instead:
+document.body.appendChild(tooltip);
+```
+
+**Alternative simpler fix:** Just ensure the highlight spans have proper z-index:
+
+```typescript
+// In the highlight CSS, ensure z-index is high enough:
+.highlight {
+  pointer-events: auto;
+  cursor: pointer;
+  border-bottom: 2px solid;
+  position: relative;
+  z-index: 999999;  /* ADD THIS */
+}
+```
+
+---
+
+### Bug 4: Only First Half of Article Gets Highlighted
+
+**Symptom:** Highlights work for content at the top of the article but not for content lower down.
+
+**Root Cause:**
+
+1. **Lazy loading**: CNN and many news sites load article content dynamically. The TreeWalker only searches text nodes that exist at the time of injection.
+2. **Ad insertions**: Sites insert ad containers that break text continuity
+3. **Infinite scroll**: Content below the fold doesn't exist in the DOM yet
+
+**Fix in `src/lib/highlights/injector.ts`:**
+
+1. Wait for page to fully load before injecting:
+
+```typescript
+// In injectHighlights function, add at the beginning:
+
+export function injectHighlights(highlights: Highlight[]): Promise<HighlightReport> {
+  return new Promise((resolve) => {
+    // If document is still loading, wait for it
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', () => resolve(doInjectHighlights(highlights)));
+    } else {
+      // Small delay to let dynamic content settle
+      setTimeout(() => resolve(doInjectHighlights(highlights)), 500);
+    }
+  });
+}
+
+function doInjectHighlights(highlights: Highlight[]): HighlightReport {
+  // ... existing code
+}
+```
+
+2. Add retry logic for content loaded after initial injection:
+
+```typescript
+// In setupMutationObserver, change to re-scan for unmatched highlights:
+
+function setupMutationObserver(): void {
+  if (mutationObserver) {
+    mutationObserver.disconnect();
+  }
+
+  mutationObserver = new MutationObserver((mutations) => {
+    // Check if we have failed highlights that might now match
+    const host = document.getElementById('marx-meter-highlights');
+    if (!host || !host.isConnected) {
+      injectHighlights(currentHighlights);
+      return;
+    }
+
+    // Also retry failed highlights when new content loads
+    const failedAttempts = getCurrentHighlights().filter(h => /* check if not highlighted */);
+    if (failedAttempts.length > 0) {
+      injectHighlights(failedAttempts);
+    }
+  });
+
+  mutationObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+}
+```
+
+---
+
+### Bug 5: Highlight Color Doesn't Match Framing Type
+
+**Symptom:** Source bias highlights appear red instead of yellow (or wrong colors for other types).
+
+**Root Cause:**
+
+1. **Silent type drop**: In `src/entrypoints/content.ts:152-191`, the `convertAnalysisToHighlights` function only handles 3 framing types: `euphemism`, `source_bias`, and `omission`. The other types (`passive_voice`, `headline_mismatch`, `other`) are silently dropped — never converted to highlights.
+
+2. **Type mapping error**: `source_bias` is mapped to `sourcing` type in highlights (line 166), but the color definition in `types.ts` uses `sourcing` which is correct. However, if an unhandled type is passed, it won't have colors and may default to browser styles.
+
+**Fix in `src/entrypoints/content.ts`:**
+
+Add all framing types to the conversion:
+
+```typescript
+function convertAnalysisToHighlights(analysis: AnalysisResult) {
+  const highlights: ReturnType<typeof HighlightSchema.parse>[] = [];
+
+  for (const framing of analysis.framingChoices) {
+    if (framing.type === 'euphemism') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'euphemism',
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    } else if (framing.type === 'source_bias') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'sourcing',
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    } else if (framing.type === 'omission') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'missing_context',
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    }
+    // ADD THESE NEW MAPPINGS:
+    else if (framing.type === 'passive_voice') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'euphemism', // Reuse euphemism color (red) - passive voice obscures agency
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    } else if (framing.type === 'headline_mismatch') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'missing_context', // Reuse missing_context (blue)
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    } else if (framing.type === 'other') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'euphemism', // Default to euphemism color
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    }
+    // END ADDITIONS
+
+    // REMOVE the old fallback that silently dropped unhandled types
+  }
+
+  // ... rest of function
+}
+```
+
+**Also fix in `src/lib/highlights/types.ts`:**
+
+Add a fallback color for unknown types:
+
+```typescript
+export const highlightColors: Record<
+  HighlightType,
+  { bg: string; border: string; tooltip: string }
+> = {
+  euphemism: {
+    bg: 'rgba(239, 68, 68, 0.15)',
+    border: 'rgba(239, 68, 68, 0.5)',
+    tooltip: 'Euphemism detected',
+  },
+  sourcing: {
+    bg: 'rgba(234, 179, 8, 0.2)',
+    border: 'rgba(234, 179, 8, 0.5)',
+    tooltip: 'Sourcing concern',
+  },
+  missing_context: {
+    bg: 'rgba(59, 130, 246, 0.15)',
+    border: 'rgba(59, 130, 246, 0.5)',
+    tooltip: 'Missing context',
+  },
+};
+
+// ADD this fallback function:
+export function getHighlightColors(type: HighlightType) {
+  return highlightColors[type] || highlightColors.euphemism;
+}
+```
+
+Then update `createHighlightSpan` to use the fallback:
+
+```typescript
+const colors = getHighlightColors(highlight.type); // Changed from direct access
+```
+
+---
+
+## Console Errors to Ignore
+
+The following errors in the console are from third-party ads/scripts on CNN and are NOT related to Marx Meter:
+
+- `CORS policy: No 'Access-Control-Allow-Origin'` — From ad networks (hb.openwebmp.com, api.rlcdn.com)
+- `Failed to load resource: net::ERR_FAILED` — Ad loading failures
+- `Not signed in with the identity provider` — CNN's authentication iframe
+- `SecurityError: Failed to read a named property 'document'` — Ad sandbox cross-origin violations
+- `ssp-sync.criteo.com` 429 errors — Rate limiting from ad trackers
+- `GSAP target not found` — Animation library warnings from ads
+- `FedCM get() rejects` — Google's federated identity API
+- `VPAIDAd: emit AdLoaded second time` — Video ad errors
+
+**Real Marx Meter errors** to look for:
+
+- `Marx Meter: X/Y highlights failed to render` — Our own failure reporting
+- Console.warn from injector.ts with diagnostic info
+
+---
+
+## Test Checklist
+
+After implementing all fixes, verify:
+
+- [ ] Toggle highlights off/on multiple times — no darkening/overlap
+- [ ] All framing types show correct colors (euphemism=red, sourcing=yellow, missing_context=blue)
+- [ ] Hover shows tooltip with explanation
+- [ ] Click opens sidepanel or shows click handler
+- [ ] Keyboard navigation works (Tab to highlight, Enter to activate)
+- [ ] Highlights appear throughout entire article, not just first half
+- [ ] Works on lazy-loaded content (scroll down, then re-analyze)
+- [ ] No console errors from Marx Meter code

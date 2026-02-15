@@ -1,5 +1,5 @@
 import type { Highlight, HighlightAttempt, HighlightReport } from './types';
-import { highlightColors } from './types';
+import { getHighlightColors } from './types';
 
 let shadowRoot: ShadowRoot | null = null;
 let highlightContainer: HTMLDivElement | null = null;
@@ -125,22 +125,66 @@ function createHighlightSpan(highlight: Highlight, matchedText: string): HTMLSpa
   span.setAttribute('role', 'button');
   span.setAttribute(
     'aria-label',
-    `${highlightColors[highlight.type].tooltip}: ${highlight.explanation}`,
+    `${getHighlightColors(highlight.type).tooltip}: ${highlight.explanation}`,
   );
 
-  const colors = highlightColors[highlight.type];
+  const colors = getHighlightColors(highlight.type);
   span.style.backgroundColor = colors.bg;
   span.style.borderBottomColor = colors.border;
+  span.style.position = 'relative';
+  span.style.zIndex = '999999';
+  span.style.display = 'inline';
 
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';
   tooltip.id = `tooltip-${highlight.id}`;
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.style.cssText = `
+    position: absolute;
+    display: none;
+    z-index: 1000000;
+    padding: 8px 12px;
+    background: #171717;
+    color: #e5e5e5;
+    font-size: 12px;
+    line-height: 1.4;
+    border-radius: 6px;
+    max-width: 300px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    text-align: left;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    white-space: normal;
+  `;
   tooltip.innerHTML = `
     <strong>${colors.tooltip}</strong><br/>
     <span style="font-style: italic; opacity: 0.8;">"${matchedText}"</span><br/>
     ${highlight.explanation}
   `;
-  span.appendChild(tooltip);
+  document.body.appendChild(tooltip);
+
+  span.addEventListener('mouseenter', () => {
+    const rect = span.getBoundingClientRect();
+    tooltip.style.display = 'block';
+    tooltip.style.top = rect.top + window.scrollY - tooltip.offsetHeight - 8 + 'px';
+    tooltip.style.left =
+      Math.max(0, rect.left + window.scrollX - tooltip.offsetWidth / 2 + rect.width / 2) + 'px';
+  });
+
+  span.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+  });
+
+  span.addEventListener('focus', () => {
+    const rect = span.getBoundingClientRect();
+    tooltip.style.display = 'block';
+    tooltip.style.top = rect.top + window.scrollY - tooltip.offsetHeight - 8 + 'px';
+    tooltip.style.left =
+      Math.max(0, rect.left + window.scrollX - tooltip.offsetWidth / 2 + rect.width / 2) + 'px';
+  });
+
+  span.addEventListener('blur', () => {
+    tooltip.style.display = 'none';
+  });
 
   span.addEventListener('click', (e) => {
     e.preventDefault();
@@ -163,6 +207,19 @@ function createHighlightSpan(highlight: Highlight, matchedText: string): HTMLSpa
   });
 
   return span;
+}
+
+function unwrapHighlights(): void {
+  const highlights = document.querySelectorAll('.highlight');
+  highlights.forEach((span) => {
+    const parent = span.parentNode;
+    if (parent) {
+      while (span.firstChild) {
+        parent.insertBefore(span.firstChild, span);
+      }
+      parent.removeChild(span);
+    }
+  });
 }
 
 function tryExactMatch(doc: Document, text: string): Range[] {
@@ -205,7 +262,6 @@ function tryExactMatch(doc: Document, text: string): Range[] {
 
         if (range.toString() === normalizedText) {
           ranges.push(range);
-          if (ranges.length >= 3) return ranges;
         }
       } catch {
         // Invalid range, skip
@@ -324,6 +380,10 @@ function tryExtractAndInsert(range: Range, span: HTMLSpanElement): boolean {
 }
 
 export function injectHighlights(highlights: Highlight[]): HighlightReport {
+  return doInjectHighlights(highlights);
+}
+
+function doInjectHighlights(highlights: Highlight[]): HighlightReport {
   ensureShadowRoot();
   if (!highlightContainer) {
     return {
@@ -416,6 +476,13 @@ export function injectHighlights(highlights: Highlight[]): HighlightReport {
       console.warn(
         `Marx Meter: Could not highlight "${highlight.text.substring(0, 50)}..."`,
         error,
+        {
+          method: method || 'none tried',
+          articleTextLength: document.body.textContent?.length || 0,
+          textNodeCount: document.querySelectorAll(
+            'p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, span, div',
+          ).length,
+        },
       );
     }
 
@@ -461,6 +528,8 @@ function setupMutationObserver(): void {
 }
 
 export function clearHighlights(): void {
+  unwrapHighlights();
+
   if (mutationObserver) {
     mutationObserver.disconnect();
     mutationObserver = null;

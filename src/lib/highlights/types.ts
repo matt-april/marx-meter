@@ -53,3 +53,7 @@ export const highlightColors: Record<
     tooltip: 'Missing context',
   },
 };
+
+export function getHighlightColors(type: HighlightType) {
+  return highlightColors[type] || highlightColors.euphemism;
+}

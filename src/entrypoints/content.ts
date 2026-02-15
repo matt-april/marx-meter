@@ -174,6 +174,27 @@ function convertAnalysisToHighlights(analysis: AnalysisResult) {
         text: framing.quote,
         explanation: framing.explanation,
       });
+    } else if (framing.type === 'passive_voice') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'euphemism',
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    } else if (framing.type === 'headline_mismatch') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'missing_context',
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
+    } else if (framing.type === 'other') {
+      highlights.push({
+        id: `framing-${highlights.length}`,
+        type: 'euphemism',
+        text: framing.quote,
+        explanation: framing.explanation,
+      });
     }
   }
 

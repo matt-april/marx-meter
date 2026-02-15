@@ -1,8 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { JSDOM } from 'jsdom';
 import { readFileSync } from 'fs';
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { extractArticle } from '../../src/lib/extraction/readability';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 function loadFixture(filename: string): Document {
   const html = readFileSync(join(__dirname, '../fixtures/articles', filename), 'utf-8');

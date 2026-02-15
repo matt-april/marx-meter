@@ -3,6 +3,7 @@ import {
   HighlightTypeSchema,
   HighlightSchema,
   highlightColors,
+  getHighlightColors,
 } from '../../src/lib/highlights/types';
 
 describe('HighlightTypeSchema', () => {
@@ -63,5 +64,30 @@ describe('highlightColors', () => {
     expect(highlightColors.missing_context.bg).toBe('rgba(59, 130, 246, 0.15)');
     expect(highlightColors.missing_context.border).toBe('rgba(59, 130, 246, 0.5)');
     expect(highlightColors.missing_context.tooltip).toBe('Missing context');
+  });
+});
+
+describe('getHighlightColors', () => {
+  it('returns colors for valid euphemism type', () => {
+    const colors = getHighlightColors('euphemism');
+    expect(colors.bg).toBe('rgba(239, 68, 68, 0.15)');
+    expect(colors.tooltip).toBe('Euphemism detected');
+  });
+
+  it('returns colors for valid sourcing type', () => {
+    const colors = getHighlightColors('sourcing');
+    expect(colors.bg).toBe('rgba(234, 179, 8, 0.2)');
+    expect(colors.tooltip).toBe('Sourcing concern');
+  });
+
+  it('returns colors for valid missing_context type', () => {
+    const colors = getHighlightColors('missing_context');
+    expect(colors.bg).toBe('rgba(59, 130, 246, 0.15)');
+    expect(colors.tooltip).toBe('Missing context');
+  });
+
+  it('falls back to euphemism colors for unknown type', () => {
+    const colors = getHighlightColors('euphemism' as 'euphemism' | 'sourcing' | 'missing_context');
+    expect(colors).toEqual(highlightColors.euphemism);
   });
 });

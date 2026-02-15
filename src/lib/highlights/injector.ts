@@ -94,7 +94,7 @@ function ensureShadowRoot(): ShadowRoot {
     .fallback-item.euphemism { border-color: #ef4444; }
     .fallback-item.passive_voice { border-color: #f97316; }
     .fallback-item.source_bias { border-color: #eab308; }
-    .fallback-item.omission { border-color: #3b82f6; }
+    .fallback-item.omission { border-color: #9ca3af; }
     .fallback-item.headline_mismatch { border-color: #a855f7; }
     .fallback-item.other { border-color: #a1a1aa; }
     .fallback-label {

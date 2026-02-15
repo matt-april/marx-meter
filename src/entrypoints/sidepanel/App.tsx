@@ -138,12 +138,7 @@ export function App() {
         const highlights = analysis.framingChoices.map(
           (choice: import('../../common/types').FramingChoice, index: number) => ({
             id: `highlight-${index}`,
-            type:
-              choice.type === 'euphemism'
-                ? 'euphemism'
-                : choice.type === 'source_bias'
-                  ? 'sourcing'
-                  : 'missing_context',
+            type: choice.type,
             text: choice.quote,
             explanation: choice.explanation,
           }),
@@ -173,12 +168,7 @@ export function App() {
         const highlights = state.result.framingChoices.map(
           (choice: import('../../common/types').FramingChoice, index: number) => ({
             id: `highlight-${index}`,
-            type:
-              choice.type === 'euphemism'
-                ? 'euphemism'
-                : choice.type === 'source_bias'
-                  ? 'sourcing'
-                  : 'missing_context',
+            type: choice.type,
             text: choice.quote,
             explanation: choice.explanation,
           }),
@@ -352,8 +342,12 @@ function FramingChoicesDisplay({ choices }: { choices: AnalysisResult['framingCh
                 : choice.type === 'source_bias'
                   ? 'bg-yellow-500/20 text-yellow-400'
                   : choice.type === 'passive_voice'
-                    ? 'bg-blue-500/20 text-blue-400'
-                    : 'bg-neutral-600 text-neutral-300'
+                    ? 'bg-orange-500/20 text-orange-400'
+                    : choice.type === 'omission'
+                      ? 'bg-gray-400/20 text-gray-400'
+                      : choice.type === 'headline_mismatch'
+                        ? 'bg-purple-500/20 text-purple-400'
+                        : 'bg-neutral-600 text-neutral-300'
             }`}
           >
             {choice.type.replace('_', ' ')}

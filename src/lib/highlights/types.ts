@@ -60,8 +60,8 @@ export const highlightColors: Record<
     tooltip: 'Source Bias',
   },
   omission: {
-    bg: 'rgba(59, 130, 246, 0.15)',
-    border: 'rgba(59, 130, 246, 0.5)',
+    bg: 'rgba(156, 163, 175, 0.2)',
+    border: 'rgba(156, 163, 175, 0.5)',
     tooltip: 'Omission',
   },
   headline_mismatch: {
@@ -77,5 +77,9 @@ export const highlightColors: Record<
 };
 
 export function getHighlightColors(type: HighlightType) {
-  return highlightColors[type] || highlightColors.euphemism;
+  if (!type || !(type in highlightColors)) {
+    console.warn(`Marx Meter: Unknown highlight type "${type}", defaulting to euphemism`);
+    return highlightColors.euphemism;
+  }
+  return highlightColors[type];
 }

@@ -65,8 +65,8 @@ describe('highlightColors', () => {
   });
 
   it('has correct colors for omission', () => {
-    expect(highlightColors.omission.bg).toBe('rgba(59, 130, 246, 0.15)');
-    expect(highlightColors.omission.border).toBe('rgba(59, 130, 246, 0.5)');
+    expect(highlightColors.omission.bg).toBe('rgba(156, 163, 175, 0.2)');
+    expect(highlightColors.omission.border).toBe('rgba(156, 163, 175, 0.5)');
     expect(highlightColors.omission.tooltip).toBe('Omission');
   });
 
@@ -104,7 +104,7 @@ describe('getHighlightColors', () => {
 
   it('returns colors for valid omission type', () => {
     const colors = getHighlightColors('omission');
-    expect(colors.bg).toBe('rgba(59, 130, 246, 0.15)');
+    expect(colors.bg).toBe('rgba(156, 163, 175, 0.2)');
     expect(colors.tooltip).toBe('Omission');
   });
 

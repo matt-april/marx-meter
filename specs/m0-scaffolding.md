@@ -27,11 +27,14 @@ This task must complete before either stream begins.
 ### Steps
 
 1. **Initialize WXT project:**
+
    ```bash
    cd /Users/matt/repos/marx_meter
    pnpm dlx wxt@latest init . --template vanilla --pm pnpm
    ```
+
    If the init command refuses to write into a non-empty directory, use a temp directory and move files:
+
    ```bash
    pnpm dlx wxt@latest init /tmp/marx-meter-init --template vanilla --pm pnpm
    cp -r /tmp/marx-meter-init/* /tmp/marx-meter-init/.* . 2>/dev/null || true
@@ -39,17 +42,20 @@ This task must complete before either stream begins.
    ```
 
 2. **Install Preact and its Vite plugin:**
+
    ```bash
    pnpm add preact
    pnpm add -D @preact/preset-vite
    ```
 
 3. **Install Tailwind CSS v4 Vite plugin:**
+
    ```bash
    pnpm add -D @tailwindcss/vite
    ```
 
 4. **Configure `wxt.config.ts`** — this is the exact content:
+
    ```typescript
    import { defineConfig } from 'wxt';
    import preact from '@preact/preset-vite';
@@ -59,7 +65,7 @@ This task must complete before either stream begins.
      srcDir: 'src',
      manifest: {
        name: 'Marx Meter',
-       description: 'Decode the news. Who benefits? Now you\'ll know.',
+       description: 'Which side are you on?',
        version: '0.0.1',
        action: {},
      },
@@ -70,6 +76,7 @@ This task must complete before either stream begins.
    ```
 
 5. **Create directory structure:**
+
    ```
    src/
    ├── entrypoints/
@@ -99,9 +106,11 @@ This task must complete before either stream begins.
        ├── api-responses/
        └── analysis-results/
    ```
+
    Create empty directories with `.gitkeep` files where needed.
 
 6. **Configure TypeScript** — update `tsconfig.json`:
+
    ```json
    {
      "extends": "./.wxt/tsconfig.json",
@@ -120,6 +129,7 @@ This task must complete before either stream begins.
    Should start without errors. Kill the dev server after confirming.
 
 ### Definition of Done for Task 1.1
+
 - [ ] `pnpm install` succeeds with no errors
 - [ ] `wxt.config.ts` exists with Preact + Tailwind plugins configured
 - [ ] `src/entrypoints/` directory exists
@@ -133,6 +143,7 @@ This task must complete before either stream begins.
 **Owner:** Agent A
 **Depends on:** Task 1.1 complete
 **Files this stream creates/modifies:**
+
 - `src/entrypoints/background.ts`
 - `src/entrypoints/content.ts`
 - `src/entrypoints/sidepanel/index.html`
@@ -164,6 +175,7 @@ export default defineBackground(() => {
 ```
 
 **Requirements:**
+
 - Uses WXT's `defineBackground` wrapper (auto-imported by WXT)
 - Uses `browser.action.onClicked` to open side panel
 - Uses `browser.sidePanel.open()` API
@@ -186,6 +198,7 @@ export default defineContentScript({
 ```
 
 **Requirements:**
+
 - Uses WXT's `defineContentScript` wrapper
 - `matches: ['<all_urls>']` — runs on all pages (will be narrowed later)
 - `runAt: 'document_idle'` — doesn't block page load
@@ -213,6 +226,7 @@ export default defineContentScript({
 ```
 
 **Requirements:**
+
 - Minimal HTML shell
 - Single `#app` mount point
 - Loads `main.tsx` as module
@@ -224,7 +238,7 @@ export default defineContentScript({
 **File:** `src/entrypoints/sidepanel/style.css`
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 **File:** `src/entrypoints/sidepanel/main.tsx`
@@ -253,6 +267,7 @@ export function App() {
 ```
 
 **Requirements:**
+
 - Preact `render()` mounts to `#app`
 - Tailwind v4 imported via `@import "tailwindcss"` (v4 convention — no `@tailwind` directives)
 - `App` component uses Tailwind utility classes
@@ -266,6 +281,7 @@ export function App() {
 Create simple placeholder icons. Use a solid red square with "MM" text, or any minimal placeholder.
 
 **Files:**
+
 - `public/icon/16.png` — 16x16
 - `public/icon/32.png` — 32x32
 - `public/icon/48.png` — 48x48
@@ -311,12 +327,14 @@ export interface ArticleData {
 ```
 
 **Requirements:**
+
 - Single interface as a starting point
 - Will be expanded in M1
 
 ---
 
 ### Stream A Definition of Done
+
 - [ ] `pnpm dev` → extension loads in Chrome
 - [ ] Clicking toolbar icon opens side panel
 - [ ] Side panel shows "Marx Meter" heading with dark background and Tailwind styling
@@ -332,6 +350,7 @@ export interface ArticleData {
 **Owner:** Agent B
 **Depends on:** Task 1.1 complete
 **Files this stream creates/modifies:**
+
 - `vitest.config.ts`
 - `tests/smoke.test.ts`
 - `.github/workflows/ci.yml`
@@ -408,6 +427,7 @@ describe('build smoke test', () => {
 ```
 
 **Requirements:**
+
 - Tests pass with `pnpm vitest run`
 - Imports from `src/` work via the configured alias
 - This is intentionally minimal — real tests come in M1
@@ -490,6 +510,7 @@ Add these scripts to `package.json` (merge with existing, do not overwrite):
 ```
 
 **Requirements:**
+
 - `pnpm test` runs Vitest and passes
 - `pnpm lint` runs without crashing (warnings OK, errors must be zero)
 - `pnpm typecheck` passes
@@ -547,6 +568,7 @@ jobs:
 ```
 
 **Requirements:**
+
 - Runs on push to `main` and on PRs
 - Uses pnpm v9 + Node 20
 - Four checks: lint, typecheck, test, build
@@ -556,6 +578,7 @@ jobs:
 ---
 
 ### Stream B Definition of Done
+
 - [ ] `pnpm test` runs and passes (1 smoke test)
 - [ ] `pnpm lint` runs with zero errors
 - [ ] `pnpm typecheck` passes
@@ -572,6 +595,7 @@ After both streams complete, one agent (or a human) does the final integration:
 1. **Add icons to manifest** — if not already done, add the `icons` field to `wxt.config.ts` manifest.
 
 2. **Run full verification:**
+
    ```bash
    pnpm lint
    pnpm typecheck
@@ -587,6 +611,7 @@ After both streams complete, one agent (or a human) does the final integration:
 4. **Update progress tracker** — mark all M0 tasks as `[x]` in `specs/PROGRESS.md`.
 
 ### M0 Complete Definition of Done
+
 - [ ] All Stream A tasks complete
 - [ ] All Stream B tasks complete
 - [ ] `pnpm lint && pnpm typecheck && pnpm test && pnpm build` all pass

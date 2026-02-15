@@ -20,6 +20,17 @@ export default defineContentScript({
   main() {
     console.log('Marx Meter content script loaded.');
 
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'MARX_METER_HIGHLIGHT_REPORT') {
+        browser.storage.local.set({ lastHighlightReport: event.data.payload });
+
+        const report = event.data.payload;
+        if (report.failed > 0) {
+          console.warn(`Marx Meter: ${report.failed}/${report.total} highlights failed to render`);
+        }
+      }
+    });
+
     browser.runtime.onMessage.addListener(
       (
         message:
@@ -44,7 +55,11 @@ export default defineContentScript({
               .then((storage: { lastAnalysis?: AnalysisResult }) => {
                 if (storage.lastAnalysis) {
                   const highlights = convertAnalysisToHighlights(storage.lastAnalysis);
-                  injectHighlights(highlights);
+                  const report = injectHighlights(highlights);
+                  const failedHighlights = report.attempts
+                    .filter((a) => !a.success)
+                    .map((a) => a.highlight);
+                  browser.storage.local.set({ failedHighlights });
                 }
               });
           } else {
@@ -56,8 +71,12 @@ export default defineContentScript({
         }
 
         if (message.type === 'INJECT_HIGHLIGHTS') {
-          injectHighlights(message.payload);
-          sendResponse({ success: true });
+          const report = injectHighlights(message.payload);
+          const failedHighlights = report.attempts
+            .filter((a) => !a.success)
+            .map((a) => a.highlight);
+          browser.storage.local.set({ failedHighlights });
+          sendResponse({ success: true, report });
           return true;
         }
 
@@ -75,7 +94,11 @@ export default defineContentScript({
             .then((storage: { highlightsEnabled?: boolean }) => {
               if (storage.highlightsEnabled !== false) {
                 const highlights = convertAnalysisToHighlights(analysis);
-                injectHighlights(highlights);
+                const report = injectHighlights(highlights);
+                const failedHighlights = report.attempts
+                  .filter((a) => !a.success)
+                  .map((a) => a.highlight);
+                browser.storage.local.set({ failedHighlights });
               }
             });
         }
@@ -130,35 +153,20 @@ function convertAnalysisToHighlights(analysis: AnalysisResult) {
   const highlights: ReturnType<typeof HighlightSchema.parse>[] = [];
 
   for (const framing of analysis.framingChoices) {
-    if (framing.type === 'euphemism') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'euphemism',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    } else if (framing.type === 'source_bias') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'sourcing',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    } else if (framing.type === 'omission') {
-      highlights.push({
-        id: `framing-${highlights.length}`,
-        type: 'missing_context',
-        text: framing.quote,
-        explanation: framing.explanation,
-      });
-    }
+    const highlightType = framing.type;
+    highlights.push({
+      id: `framing-${highlights.length}`,
+      type: highlightType,
+      text: framing.quote,
+      explanation: framing.explanation,
+    });
   }
 
   if (analysis.missingContext) {
     const firstParagraph = analysis.quickTake.split('.')[0];
     highlights.push({
       id: 'missing-context',
-      type: 'missing_context',
+      type: 'omission',
       text: firstParagraph,
       explanation: analysis.missingContext,
     });

@@ -36,7 +36,7 @@ For "whoBenefits": List the specific groups (e.g., "shareholders", "pharmaceutic
 
 For "whosAbsent": List specific perspectives or stakeholders that are conspicuously missing from the article. Think about who is affected but not quoted or considered.
 
-For "framingChoices": Identify at least 3 specific framing choices. For each one:
+For "framingChoices": Identify all notable framing choices in the article. For each one:
 - "type": Classify as one of: "euphemism" (loaded or sanitizing language), "passive_voice" (obscures who did what), "source_bias" (who is/isn't quoted), "omission" (what context is missing), "headline_mismatch" (headline doesn't match body), or "other".
 - "quote": Copy the EXACT text from the article that demonstrates this framing choice. This must be a verbatim quote that appears in the article text above.
 - "explanation": Explain in plain language why this framing choice matters — what does it hide, normalize, or emphasize?

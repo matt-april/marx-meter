@@ -139,6 +139,11 @@ export interface ClearHighlightsMessage {
   type: 'CLEAR_HIGHLIGHTS';
 }
 
+export interface HighlightReportMessage {
+  type: 'HIGHLIGHT_REPORT';
+  payload: import('../lib/highlights/types').HighlightReport;
+}
+
 export type RuntimeMessage =
   | ExtractArticleMessage
   | ArticleExtractedMessage
@@ -150,4 +155,5 @@ export type RuntimeMessage =
   | HighlightsToggleMessage
   | HighlightClickMessage
   | InjectHighlightsMessage
-  | ClearHighlightsMessage;
+  | ClearHighlightsMessage
+  | HighlightReportMessage;

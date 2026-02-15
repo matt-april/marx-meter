@@ -1,6 +1,6 @@
 # Marx Meter
 
-*"Who benefits? Now you'll know."*
+_"Which side are you on?"_
 
 A browser extension that deconstructs news articles in-place to reveal class interests, framing choices, ownership structures, and ideological underpinnings — grounded in materialist media criticism and accessible to everyone.
 
@@ -26,16 +26,16 @@ Client-heavy, server-optional. The extension works with zero backend infrastruct
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Extension Framework | WXT (Vite) |
-| UI | Preact + Tailwind CSS v4 |
-| State | Zustand |
-| Component Dev | Storybook |
-| Storage | IndexedDB (Dexie.js) |
-| Testing | Vitest + Playwright |
-| Package Manager | pnpm |
-| CI/CD | GitHub Actions |
+| Layer               | Technology               |
+| ------------------- | ------------------------ |
+| Extension Framework | WXT (Vite)               |
+| UI                  | Preact + Tailwind CSS v4 |
+| State               | Zustand                  |
+| Component Dev       | Storybook                |
+| Storage             | IndexedDB (Dexie.js)     |
+| Testing             | Vitest + Playwright      |
+| Package Manager     | pnpm                     |
+| CI/CD               | GitHub Actions           |
 
 ## Development
 

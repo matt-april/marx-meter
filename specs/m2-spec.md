@@ -1984,7 +1984,7 @@ All of these must be true before M2 is considered complete:
 - [ ] Ownership info displays for top 20 outlets
 - [ ] At least 5 theoretical references appear contextually in analysis output
 - [ ] "Further Reading" sections expand to show concept summary + external link
-- [ ] In-page highlights appear on analyzed articles (3 colors by type)
+- [ ] In-page highlights appear on analyzed articles (6 colors by type)
 - [ ] Hover tooltip shows analysis summary; click scrolls side panel
 - [ ] Highlights toggleable from side panel
 - [ ] Streaming analysis display (text appears progressively)

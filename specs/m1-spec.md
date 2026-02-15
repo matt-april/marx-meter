@@ -28,6 +28,7 @@ This project uses **trunk-based development**. All work merges to `main`.
    - Integration: `m1/integration`
 
 2. **Branch lifecycle:**
+
    ```bash
    git checkout main
    git pull origin main
@@ -74,11 +75,13 @@ Integration                     →  merge to main last (depends on A, B, C)
 5. Add any relevant notes (package versions installed, deviations from spec, etc.)
 
 Example — before:
+
 ```
 | Integrate Readability.js in content script | [ ] | | |
 ```
 
 Example — after:
+
 ```
 | Integrate Readability.js in content script | [x] | Agent-A | @mozilla/readability@0.5.0 |
 ```
@@ -131,6 +134,7 @@ M0 complete ────────┼──▶ Stream B: AI Pipeline (types + 
 ### File Ownership Rules
 
 **Stream A owns these files (no other stream may modify them):**
+
 - `src/lib/extraction/readability.ts`
 - `src/lib/extraction/domain.ts`
 - `src/entrypoints/content.ts` (modify existing)
@@ -138,6 +142,7 @@ M0 complete ────────┼──▶ Stream B: AI Pipeline (types + 
 - `tests/fixtures/articles/` (HTML fixture files)
 
 **Stream B owns these files:**
+
 - `src/common/types.ts` (modify existing — add AnalysisResult types)
 - `src/lib/ai/gemini.ts`
 - `src/lib/ai/types.ts`
@@ -147,6 +152,7 @@ M0 complete ────────┼──▶ Stream B: AI Pipeline (types + 
 - `tests/fixtures/api-responses/` (JSON fixture files)
 
 **Stream C owns these files:**
+
 - `src/entrypoints/sidepanel/App.tsx` (modify existing)
 - `src/entrypoints/sidepanel/components/AnalysisDisplay.tsx`
 - `src/entrypoints/sidepanel/components/LoadingSpinner.tsx`
@@ -159,6 +165,7 @@ M0 complete ────────┼──▶ Stream B: AI Pipeline (types + 
 - `tests/fixtures/analysis-results/` (JSON fixture files)
 
 **Integration owns these files:**
+
 - `src/entrypoints/background.ts` (modify existing)
 - `src/entrypoints/sidepanel/App.tsx` (modify to wire everything together)
 - `src/entrypoints/sidepanel/components/ApiKeyInput.tsx`
@@ -197,7 +204,14 @@ export type ArticleData = z.infer<typeof ArticleDataSchema>;
 // ─── Analysis Result (returned by AI pipeline) ───
 
 export const FramingChoiceSchema = z.object({
-  type: z.enum(['euphemism', 'passive_voice', 'source_bias', 'omission', 'headline_mismatch', 'other']),
+  type: z.enum([
+    'euphemism',
+    'passive_voice',
+    'source_bias',
+    'omission',
+    'headline_mismatch',
+    'other',
+  ]),
   quote: z.string().describe('Exact quote from the article text'),
   explanation: z.string().describe('Why this framing choice matters, in plain language'),
 });
@@ -205,8 +219,16 @@ export const FramingChoiceSchema = z.object({
 export type FramingChoice = z.infer<typeof FramingChoiceSchema>;
 
 export const IdeologicalAxisSchema = z.object({
-  name: z.enum(['pro_capital_vs_pro_labor', 'individualist_vs_systemic', 'nationalist_vs_internationalist']),
-  score: z.number().min(0).max(10).describe('0 = first pole (e.g. pro-capital), 10 = second pole (e.g. pro-labor)'),
+  name: z.enum([
+    'pro_capital_vs_pro_labor',
+    'individualist_vs_systemic',
+    'nationalist_vs_internationalist',
+  ]),
+  score: z
+    .number()
+    .min(0)
+    .max(10)
+    .describe('0 = first pole (e.g. pro-capital), 10 = second pole (e.g. pro-labor)'),
   label: z.string().describe('Human-readable label for the score, e.g. "Strongly pro-capital"'),
   explanation: z.string().describe('Brief explanation of why this score was given'),
 });
@@ -214,18 +236,31 @@ export const IdeologicalAxisSchema = z.object({
 export type IdeologicalAxis = z.infer<typeof IdeologicalAxisSchema>;
 
 export const AnalysisResultSchema = z.object({
-  quickTake: z.string().describe('2-3 sentence summary of the key framing and class interests at play'),
+  quickTake: z
+    .string()
+    .describe('2-3 sentence summary of the key framing and class interests at play'),
   whoBenefits: z.array(z.string()).min(1).describe('Groups positioned favorably by the framing'),
-  whosAbsent: z.array(z.string()).min(1).describe('Perspectives or stakeholders conspicuously missing'),
-  framingChoices: z.array(FramingChoiceSchema).min(1).describe('Specific framing choices identified in the article'),
-  ideologicalAxes: z.array(IdeologicalAxisSchema).min(1).describe('Multi-axis ideological assessment'),
-  sourceAnalysis: z.object({
-    totalSources: z.number().int().min(0),
-    corporateOrOfficial: z.number().int().min(0),
-    workerOrCommunity: z.number().int().min(0),
-    anonymous: z.number().int().min(0),
-    summary: z.string(),
-  }).describe('Breakdown of who is quoted and how often'),
+  whosAbsent: z
+    .array(z.string())
+    .min(1)
+    .describe('Perspectives or stakeholders conspicuously missing'),
+  framingChoices: z
+    .array(FramingChoiceSchema)
+    .min(1)
+    .describe('Specific framing choices identified in the article'),
+  ideologicalAxes: z
+    .array(IdeologicalAxisSchema)
+    .min(1)
+    .describe('Multi-axis ideological assessment'),
+  sourceAnalysis: z
+    .object({
+      totalSources: z.number().int().min(0),
+      corporateOrOfficial: z.number().int().min(0),
+      workerOrCommunity: z.number().int().min(0),
+      anonymous: z.number().int().min(0),
+      summary: z.string(),
+    })
+    .describe('Breakdown of who is quoted and how often'),
   missingContext: z.string().describe('What systemic or historical context does the article omit?'),
 });
 
@@ -272,6 +307,7 @@ export type RuntimeMessage =
 ```
 
 **Definition of Done:**
+
 - [ ] `pnpm typecheck` passes with new types
 - [ ] All Zod schemas are defined and exported
 - [ ] All TypeScript types derived from schemas via `z.infer`
@@ -349,12 +385,14 @@ export class GeminiAdapter implements AIProvider {
 ```
 
 **Important notes for the implementing agent:**
+
 - The `@google/genai` package is the NEW official Google Gen AI SDK. Do NOT use `@google/generative-ai` (that package is deprecated).
 - `zodToJsonSchema` converts a Zod schema to a JSON Schema object, which is what the Gemini API expects for `responseJsonSchema`.
 - `temperature: 0.3` is intentionally low — we want consistent, analytical output, not creative writing.
 - The `model` defaults to `gemini-2.5-flash` which has generous free tier limits (10 RPM, 250 RPD).
 
 **Definition of Done:**
+
 - [ ] `GeminiAdapter` class implements `AIProvider` interface
 - [ ] `analyze()` sends prompt to Gemini, parses JSON response, validates with Zod
 - [ ] `validateKey()` makes a test API call and returns boolean
@@ -405,7 +443,7 @@ For "whoBenefits": List the specific groups (e.g., "shareholders", "pharmaceutic
 
 For "whosAbsent": List specific perspectives or stakeholders that are conspicuously missing from the article. Think about who is affected but not quoted or considered.
 
-For "framingChoices": Identify at least 3 specific framing choices. For each one:
+For "framingChoices": Identify all notable framing choices in the article. For each one:
 - "type": Classify as one of: "euphemism" (loaded or sanitizing language), "passive_voice" (obscures who did what), "source_bias" (who is/isn't quoted), "omission" (what context is missing), "headline_mismatch" (headline doesn't match body), or "other".
 - "quote": Copy the EXACT text from the article that demonstrates this framing choice. This must be a verbatim quote that appears in the article text above.
 - "explanation": Explain in plain language why this framing choice matters — what does it hide, normalize, or emphasize?
@@ -460,6 +498,7 @@ ARTICLE TEXT:
 ```
 
 **Definition of Done:**
+
 - [ ] `buildAnalysisPrompt()` returns a string containing the article text and analysis instructions
 - [ ] Prompt truncates articles longer than 30,000 characters
 - [ ] `data/prompts/pass1-pass2.txt` contains the human-readable prompt template
@@ -477,7 +516,12 @@ Create a valid `AnalysisResult` JSON object that the Gemini API would return. Us
 {
   "quickTake": "This article frames mass layoffs at TechCorp as a positive 'restructuring' that will benefit shareholders, while centering investor reaction and analyst commentary. No workers or union representatives are quoted despite 5,000 job losses.",
   "whoBenefits": ["TechCorp shareholders", "C-suite executives", "Wall Street analysts"],
-  "whosAbsent": ["Laid-off workers", "Labor unions", "Affected communities", "Remaining employees facing increased workloads"],
+  "whosAbsent": [
+    "Laid-off workers",
+    "Labor unions",
+    "Affected communities",
+    "Remaining employees facing increased workloads"
+  ],
   "framingChoices": [
     {
       "type": "euphemism",
@@ -567,7 +611,8 @@ const mockArticle: ArticleData = {
   title: 'TechCorp Announces Workforce Optimization',
   byline: 'John Reporter',
   content: '<p>Article HTML content here</p>',
-  textContent: 'TechCorp announced today a workforce optimization initiative affecting 5,000 positions. According to Goldman Sachs analyst Jane Smith, the restructuring positions TechCorp for long-term growth. Positions were eliminated as part of the strategic review.',
+  textContent:
+    'TechCorp announced today a workforce optimization initiative affecting 5,000 positions. According to Goldman Sachs analyst Jane Smith, the restructuring positions TechCorp for long-term growth. Positions were eliminated as part of the strategic review.',
   excerpt: 'TechCorp announced workforce optimization',
   domain: 'wsj.com',
   url: 'https://www.wsj.com/articles/techcorp-layoffs',
@@ -819,9 +864,7 @@ describe('AnalysisResultSchema', () => {
   it('rejects invalid framing choice type', () => {
     const invalid = {
       ...validResponse,
-      framingChoices: [
-        { type: 'not_a_valid_type', quote: 'test', explanation: 'test' },
-      ],
+      framingChoices: [{ type: 'not_a_valid_type', quote: 'test', explanation: 'test' }],
     };
     const result = AnalysisResultSchema.safeParse(invalid);
     expect(result.success).toBe(false);
@@ -830,9 +873,7 @@ describe('AnalysisResultSchema', () => {
   it('rejects invalid axis name', () => {
     const invalid = {
       ...validResponse,
-      ideologicalAxes: [
-        { name: 'fake_axis', score: 5, label: 'test', explanation: 'test' },
-      ],
+      ideologicalAxes: [{ name: 'fake_axis', score: 5, label: 'test', explanation: 'test' }],
     };
     const result = AnalysisResultSchema.safeParse(invalid);
     expect(result.success).toBe(false);
@@ -881,6 +922,7 @@ describe('ArticleDataSchema', () => {
 ```
 
 **Definition of Done for all B tasks:**
+
 - [ ] `pnpm test` passes for all tests in `tests/ai/`
 - [ ] `pnpm typecheck` passes
 - [ ] Gemini adapter handles valid response, empty response, malformed JSON, and non-JSON
@@ -972,6 +1014,7 @@ declare module '@mozilla/readability' {
 ```
 
 **Definition of Done:**
+
 - [ ] `extractArticle()` returns structured article data from a valid HTML document
 - [ ] Returns `null` for non-article pages
 - [ ] Type declarations exist for `@mozilla/readability`
@@ -1012,6 +1055,7 @@ export function getOutletDomain(url: string): string {
 ```
 
 **Definition of Done:**
+
 - [ ] `getOutletDomain()` correctly strips common subdomains
 - [ ] Handles invalid URLs gracefully (returns input)
 - [ ] `pnpm typecheck` passes
@@ -1025,7 +1069,12 @@ export function getOutletDomain(url: string): string {
 ```typescript
 import { extractArticle } from '../lib/extraction/readability';
 import { getOutletDomain } from '../lib/extraction/domain';
-import type { ArticleData, ExtractArticleMessage, ArticleExtractedMessage, ExtractionFailedMessage } from '../common/types';
+import type {
+  ArticleData,
+  ExtractArticleMessage,
+  ArticleExtractedMessage,
+  ExtractionFailedMessage,
+} from '../common/types';
 
 export default defineContentScript({
   matches: ['<all_urls>'],
@@ -1045,7 +1094,8 @@ export default defineContentScript({
           if (!result) {
             const response: ExtractionFailedMessage = {
               type: 'EXTRACTION_FAILED',
-              error: 'Could not extract article content from this page. It may not be a news article.',
+              error:
+                'Could not extract article content from this page. It may not be a news article.',
             };
             sendResponse(response);
             return;
@@ -1084,6 +1134,7 @@ export default defineContentScript({
 ```
 
 **Definition of Done:**
+
 - [ ] Content script listens for `EXTRACT_ARTICLE` messages
 - [ ] Calls `extractArticle()` on a cloned document
 - [ ] Returns `ArticleExtractedMessage` on success
@@ -1099,6 +1150,7 @@ export default defineContentScript({
 **File: `tests/fixtures/articles/sample-article.html`**
 
 Create a realistic article HTML fixture. It must contain:
+
 - An `<article>` or main content area
 - A headline in an `<h1>` tag
 - A byline
@@ -1110,29 +1162,56 @@ Here is a minimal example you can use:
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta property="og:title" content="TechCorp Announces Major Restructuring Amid Record Profits">
-  <meta property="article:author" content="Jane Reporter">
-  <meta property="article:published_time" content="2026-02-10T10:00:00Z">
-  <title>TechCorp Announces Major Restructuring Amid Record Profits - Example News</title>
-</head>
-<body>
-  <header>
-    <nav>Example News</nav>
-  </header>
-  <article>
-    <h1>TechCorp Announces Major Restructuring Amid Record Profits</h1>
-    <p class="byline">By Jane Reporter | February 10, 2026</p>
-    <p>TechCorp announced today a workforce optimization initiative that will result in the elimination of approximately 5,000 positions across its global operations, even as the company reported record quarterly revenue of $48.2 billion.</p>
-    <p>"This restructuring positions TechCorp for sustainable long-term growth in the AI era," said CEO Mark Williams in a statement to investors.</p>
-    <p>According to Goldman Sachs analyst Jane Smith, the restructuring positions TechCorp for long-term growth. "We see this as a positive signal for shareholders," Smith wrote in a research note.</p>
-    <p>Positions were eliminated as part of the strategic review, with the majority of cuts affecting customer support and content moderation teams.</p>
-    <p>TechCorp's stock rose 4.2% in after-hours trading following the announcement. The company's market capitalization now exceeds $2 trillion.</p>
-    <p>An unnamed administration official said the White House was "monitoring the situation" but declined to comment further on whether any policy response was planned.</p>
-    <p>The workforce optimization initiative is expected to save the company approximately $1.2 billion annually, which TechCorp said would be redirected toward artificial intelligence research and development.</p>
-  </article>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      property="og:title"
+      content="TechCorp Announces Major Restructuring Amid Record Profits"
+    />
+    <meta property="article:author" content="Jane Reporter" />
+    <meta property="article:published_time" content="2026-02-10T10:00:00Z" />
+    <title>TechCorp Announces Major Restructuring Amid Record Profits - Example News</title>
+  </head>
+  <body>
+    <header>
+      <nav>Example News</nav>
+    </header>
+    <article>
+      <h1>TechCorp Announces Major Restructuring Amid Record Profits</h1>
+      <p class="byline">By Jane Reporter | February 10, 2026</p>
+      <p>
+        TechCorp announced today a workforce optimization initiative that will result in the
+        elimination of approximately 5,000 positions across its global operations, even as the
+        company reported record quarterly revenue of $48.2 billion.
+      </p>
+      <p>
+        "This restructuring positions TechCorp for sustainable long-term growth in the AI era," said
+        CEO Mark Williams in a statement to investors.
+      </p>
+      <p>
+        According to Goldman Sachs analyst Jane Smith, the restructuring positions TechCorp for
+        long-term growth. "We see this as a positive signal for shareholders," Smith wrote in a
+        research note.
+      </p>
+      <p>
+        Positions were eliminated as part of the strategic review, with the majority of cuts
+        affecting customer support and content moderation teams.
+      </p>
+      <p>
+        TechCorp's stock rose 4.2% in after-hours trading following the announcement. The company's
+        market capitalization now exceeds $2 trillion.
+      </p>
+      <p>
+        An unnamed administration official said the White House was "monitoring the situation" but
+        declined to comment further on whether any policy response was planned.
+      </p>
+      <p>
+        The workforce optimization initiative is expected to save the company approximately $1.2
+        billion annually, which TechCorp said would be redirected toward artificial intelligence
+        research and development.
+      </p>
+    </article>
+  </body>
 </html>
 ```
 
@@ -1141,16 +1220,18 @@ Here is a minimal example you can use:
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head><title>Google Search</title></head>
-<body>
-  <div id="search-form">
-    <input type="text" name="q">
-    <button>Search</button>
-  </div>
-  <div id="results">
-    <p>No article content here.</p>
-  </div>
-</body>
+  <head>
+    <title>Google Search</title>
+  </head>
+  <body>
+    <div id="search-form">
+      <input type="text" name="q" />
+      <button>Search</button>
+    </div>
+    <div id="results">
+      <p>No article content here.</p>
+    </div>
+  </body>
 </html>
 ```
 
@@ -1259,6 +1340,7 @@ describe('getOutletDomain', () => {
 ```
 
 **Definition of Done for all A tasks:**
+
 - [ ] `pnpm test` passes for all tests in `tests/extraction/`
 - [ ] `extractArticle()` returns valid data for the sample article fixture
 - [ ] `extractArticle()` returns null (or very short content) for non-article pages
@@ -1455,10 +1537,7 @@ export function IdeologicalAxes({ axes }: IdeologicalAxesProps) {
                 <span>{rightLabel}</span>
               </div>
               <div class="mt-1 h-2 rounded-full bg-neutral-800">
-                <div
-                  class="h-2 rounded-full bg-neutral-400"
-                  style={{ width: `${pct}%` }}
-                />
+                <div class="h-2 rounded-full bg-neutral-400" style={{ width: `${pct}%` }} />
               </div>
               <p class="mt-1 text-xs text-neutral-500">
                 {axis.label} ({axis.score}/10) — {axis.explanation}
@@ -1527,6 +1606,7 @@ export function AnalysisDisplay({ result, articleTitle, articleDomain }: Analysi
 ```
 
 **Definition of Done:**
+
 - [ ] All 7 component files created
 - [ ] Components render without errors when given valid props
 - [ ] `pnpm typecheck` passes
@@ -1741,6 +1821,7 @@ describe('ErrorDisplay', () => {
 ```
 
 **Definition of Done:**
+
 - [ ] `pnpm test` passes for all tests in `tests/sidepanel/`
 - [ ] All three states tested: loading, error, success
 - [ ] Minimal data renders without crashing
@@ -1804,7 +1885,9 @@ async function handleAnalysis(article: import('../common/types').ArticleData) {
   const apiKey = storage.geminiApiKey;
 
   if (!apiKey) {
-    throw new Error('No Gemini API key configured. Please enter your API key in the extension settings.');
+    throw new Error(
+      'No Gemini API key configured. Please enter your API key in the extension settings.',
+    );
   }
 
   const adapter = new GeminiAdapter(apiKey);
@@ -1813,6 +1896,7 @@ async function handleAnalysis(article: import('../common/types').ArticleData) {
 ```
 
 **Definition of Done:**
+
 - [ ] Background script listens for `ANALYZE_ARTICLE` messages
 - [ ] Reads API key from `chrome.storage.local`
 - [ ] Creates `GeminiAdapter` and calls `analyze()`
@@ -2002,31 +2086,19 @@ export function App() {
 
       {state.status === 'needs_key' && (
         <div class="mt-4">
-          <ApiKeyInput
-            onKeySubmit={handleApiKeySubmit}
-            isValidating={false}
-            error={null}
-          />
+          <ApiKeyInput onKeySubmit={handleApiKeySubmit} isValidating={false} error={null} />
         </div>
       )}
 
       {state.status === 'validating_key' && (
         <div class="mt-4">
-          <ApiKeyInput
-            onKeySubmit={handleApiKeySubmit}
-            isValidating={true}
-            error={null}
-          />
+          <ApiKeyInput onKeySubmit={handleApiKeySubmit} isValidating={true} error={null} />
         </div>
       )}
 
       {state.status === 'key_error' && (
         <div class="mt-4">
-          <ApiKeyInput
-            onKeySubmit={handleApiKeySubmit}
-            isValidating={false}
-            error={state.error}
-          />
+          <ApiKeyInput onKeySubmit={handleApiKeySubmit} isValidating={false} error={state.error} />
         </div>
       )}
 
@@ -2084,6 +2156,7 @@ export function App() {
 ```
 
 **Definition of Done:**
+
 - [ ] App shows API key input when no key is stored
 - [ ] App shows "Analyze" button when key exists
 - [ ] Clicking "Analyze" extracts article via content script, then sends to background for AI analysis
@@ -2109,7 +2182,7 @@ export default defineConfig({
   srcDir: 'src',
   manifest: {
     name: 'Marx Meter',
-    description: "Decode the news. Who benefits? Now you'll know.",
+    description: 'Which side are you on?',
     version: '0.1.0',
     action: {},
     permissions: ['storage', 'activeTab'],
@@ -2127,10 +2200,12 @@ export default defineConfig({
 ```
 
 Changes from M0:
+
 - Added `permissions: ['storage', 'activeTab']`
 - Bumped version from `0.0.1` to `0.1.0`
 
 **Definition of Done:**
+
 - [ ] `permissions` array includes `storage` and `activeTab`
 - [ ] Version bumped to `0.1.0`
 - [ ] `pnpm build` produces a valid manifest with these permissions
@@ -2157,16 +2232,17 @@ Change `"name": "wxt-starter"` to `"name": "marx-meter"` in `package.json`.
 
 ## What to Test (Summary)
 
-| Area | Test Type | Location | What It Validates |
-|------|-----------|----------|-------------------|
-| Zod schemas | Unit | `tests/ai/schema-validation.test.ts` | AnalysisResult validates correct data, rejects invalid data |
-| Gemini adapter | Unit (mocked) | `tests/ai/gemini.test.ts` | Handles valid/empty/malformed/non-JSON responses |
-| Prompt builder | Unit | `tests/ai/prompt.test.ts` | Includes article data, truncates long articles, references all output fields |
-| Readability extraction | Unit | `tests/extraction/readability.test.ts` | Extracts articles, returns null for non-articles |
-| Domain detection | Unit | `tests/extraction/domain.test.ts` | Strips prefixes, handles edge cases |
-| Side panel components | Unit | `tests/sidepanel/*.test.tsx` | Renders all states, error retry works |
+| Area                   | Test Type     | Location                               | What It Validates                                                            |
+| ---------------------- | ------------- | -------------------------------------- | ---------------------------------------------------------------------------- |
+| Zod schemas            | Unit          | `tests/ai/schema-validation.test.ts`   | AnalysisResult validates correct data, rejects invalid data                  |
+| Gemini adapter         | Unit (mocked) | `tests/ai/gemini.test.ts`              | Handles valid/empty/malformed/non-JSON responses                             |
+| Prompt builder         | Unit          | `tests/ai/prompt.test.ts`              | Includes article data, truncates long articles, references all output fields |
+| Readability extraction | Unit          | `tests/extraction/readability.test.ts` | Extracts articles, returns null for non-articles                             |
+| Domain detection       | Unit          | `tests/extraction/domain.test.ts`      | Strips prefixes, handles edge cases                                          |
+| Side panel components  | Unit          | `tests/sidepanel/*.test.tsx`           | Renders all states, error retry works                                        |
 
 **Never test:**
+
 - Actual Gemini API calls (all mocked)
 - Tailwind class names
 - Preact rendering internals
@@ -2197,6 +2273,7 @@ All of these must be true before M1 is considered complete:
 ## Files Created in This Milestone (Complete List)
 
 ### New Files
+
 ```
 src/common/types.ts                              (modified — replace contents)
 src/lib/ai/types.ts
@@ -2231,6 +2308,7 @@ tests/fixtures/analysis-results/minimal.json
 ```
 
 ### Modified Files
+
 ```
 src/entrypoints/content.ts                       (replace contents)
 src/entrypoints/background.ts                    (replace contents)
@@ -2240,6 +2318,7 @@ package.json                                     (rename, add dependencies)
 ```
 
 ### Deleted Files
+
 ```
 src/entrypoints/popup/                           (entire directory)
 src/components/counter.ts

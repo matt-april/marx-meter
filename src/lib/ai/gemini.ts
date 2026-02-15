@@ -14,7 +14,7 @@ export class GeminiAdapter implements AIProvider {
   }
 
   async analyze(article: ArticleData): Promise<AnalysisResult> {
-    const prompt = buildAnalysisPrompt(article);
+    const prompt = await buildAnalysisPrompt(article);
 
     const response = await this.client.models.generateContent({
       model: this.model,
@@ -37,7 +37,7 @@ export class GeminiAdapter implements AIProvider {
   }
 
   async *stream(article: ArticleData): AsyncGenerator<string, AnalysisResult, unknown> {
-    const prompt = buildAnalysisPrompt(article);
+    const prompt = await buildAnalysisPrompt(article);
 
     const stream = await this.client.models.generateContentStream({
       model: this.model,

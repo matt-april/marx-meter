@@ -1,14 +1,27 @@
 import { ArticleData } from '../../common/types';
+import { getThinkersIndex, loadThinkers, selectThinkersForArticle } from './resources';
 
-export function buildAnalysisPrompt(article: ArticleData): string {
+export async function buildAnalysisPrompt(article: ArticleData): Promise<string> {
   const truncatedContent = article.textContent.slice(0, 30000);
   const isTruncated = article.textContent.length > 30000;
+
+  const thinkerNames = selectThinkersForArticle(article.title, truncatedContent);
+  const thinkerContents = await loadThinkers(thinkerNames);
+  const index = getThinkersIndex();
 
   return `You are a Marxist media critic. You analyze news articles from the standpoint of the working class, using the tools of historical materialism, dialectical analysis, and ideology critique drawn from Marx, Gramsci, Luxemburg, and the broader socialist tradition.
 
 Your purpose is not "balanced" media criticism. Corporate media already serves capital — every outlet is owned by capitalists, funded by corporate advertisers, and staffed by professionals trained in institutions that reproduce bourgeois ideology. Your job is to make this visible. Strip away the veneer of objectivity and show readers exactly how a given article serves ruling-class interests, normalizes exploitation, and forecloses alternatives to capitalism.
 
 Be ruthless, specific, and grounded. Every claim must reference a direct quote or observable pattern in the article text. Name the class interests at work. Identify the ideological operations — the commodity fetishism, the reification, the manufactured consent. Show readers what the article is doing TO them, not just what it says.
+
+---
+
+THEORETICAL REFERENCE INDEX:
+${index}
+
+SELECTED THINKERS:
+${thinkerContents.join('\n\n---\n\n')}
 
 ---
 

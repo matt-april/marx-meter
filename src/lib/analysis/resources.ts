@@ -1,45 +1,51 @@
-import thinkersIndexRaw from '../../resources/thinkers/INDEX.md?raw';
+import thinkersIndexRaw from '../../../data/references/thinkers/INDEX.md?raw';
 
 const thinkerLoaders: Record<string, () => Promise<string>> = {
-  'karl-marx': () => import('../../resources/thinkers/karl-marx.md?raw').then((m) => m.default),
+  'karl-marx': () =>
+    import('../../../data/references/thinkers/karl-marx.md?raw').then((m) => m.default),
   'friedrich-engels': () =>
-    import('../../resources/thinkers/friedrich-engels.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/friedrich-engels.md?raw').then((m) => m.default),
   'paul-lafargue': () =>
-    import('../../resources/thinkers/paul-lafargue.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/paul-lafargue.md?raw').then((m) => m.default),
   'daniel-deleon': () =>
-    import('../../resources/thinkers/daniel-deleon.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/daniel-deleon.md?raw').then((m) => m.default),
   'karl-kautsky': () =>
-    import('../../resources/thinkers/karl-kautsky.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/karl-kautsky.md?raw').then((m) => m.default),
   'georgi-plekhanov': () =>
-    import('../../resources/thinkers/georgi-plekhanov.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/georgi-plekhanov.md?raw').then((m) => m.default),
   'clara-zetkin': () =>
-    import('../../resources/thinkers/clara-zetkin.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/clara-zetkin.md?raw').then((m) => m.default),
   'james-connolly': () =>
-    import('../../resources/thinkers/james-connolly.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/james-connolly.md?raw').then((m) => m.default),
   'vladimir-lenin': () =>
-    import('../../resources/thinkers/vladimir-lenin.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/vladimir-lenin.md?raw').then((m) => m.default),
   'rosa-luxemburg': () =>
-    import('../../resources/thinkers/rosa-luxemburg.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/rosa-luxemburg.md?raw').then((m) => m.default),
   'alexandra-kollontai': () =>
-    import('../../resources/thinkers/alexandra-kollontai.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/alexandra-kollontai.md?raw').then((m) => m.default),
   'leon-trotsky': () =>
-    import('../../resources/thinkers/leon-trotsky.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/leon-trotsky.md?raw').then((m) => m.default),
   'georg-lukacs': () =>
-    import('../../resources/thinkers/georg-lukacs.md?raw').then((m) => m.default),
-  'karl-korsch': () => import('../../resources/thinkers/karl-korsch.md?raw').then((m) => m.default),
-  'mn-roy': () => import('../../resources/thinkers/mn-roy.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/georg-lukacs.md?raw').then((m) => m.default),
+  'karl-korsch': () =>
+    import('../../../data/references/thinkers/karl-korsch.md?raw').then((m) => m.default),
+  'mn-roy': () => import('../../../data/references/thinkers/mn-roy.md?raw').then((m) => m.default),
   'nikolai-bukharin': () =>
-    import('../../resources/thinkers/nikolai-bukharin.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/nikolai-bukharin.md?raw').then((m) => m.default),
   'antonio-gramsci': () =>
-    import('../../resources/thinkers/antonio-gramsci.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/antonio-gramsci.md?raw').then((m) => m.default),
   'jose-carlos-mariategui': () =>
-    import('../../resources/thinkers/jose-carlos-mariategui.md?raw').then((m) => m.default),
-  'clr-james': () => import('../../resources/thinkers/clr-james.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/jose-carlos-mariategui.md?raw').then(
+      (m) => m.default,
+    ),
+  'clr-james': () =>
+    import('../../../data/references/thinkers/clr-james.md?raw').then((m) => m.default),
   'george-padmore': () =>
-    import('../../resources/thinkers/george-padmore.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/george-padmore.md?raw').then((m) => m.default),
   'paul-mattick': () =>
-    import('../../resources/thinkers/paul-mattick.md?raw').then((m) => m.default),
-  'hal-draper': () => import('../../resources/thinkers/hal-draper.md?raw').then((m) => m.default),
+    import('../../../data/references/thinkers/paul-mattick.md?raw').then((m) => m.default),
+  'hal-draper': () =>
+    import('../../../data/references/thinkers/hal-draper.md?raw').then((m) => m.default),
 };
 
 export function getThinkersIndex(): string {
